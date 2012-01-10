@@ -17,9 +17,9 @@
     "mongoose-auth": "*"
   },
   "devDependencies": {
-  	"vows": "*",
-	"mocha": "*",
-	"should": "*"
+    "vows": "*",
+    "mocha": "*",
+    "should": "*"
   },
   "engine": "node >= 0.6.6"
 }

@@ -1,5 +1,16 @@
 
-// TODO, possibly move these into an automated
-// loader like in the controllers model
-  
-exports.User = require('./user');
+var fs = require('fs'), 
+  files = fs.readdirSync(__dirname); 
+require('inflection');
+    
+files.forEach(function(file) {
+  if (file === 'index.js') { 
+    return;
+  }
+  var name, match = /^([a-z_]*)\.js$/.exec(file);
+  if (match) {
+    name = match[1].classify();
+    module.exports[name] = require('./' + file);
+  }
+});
+

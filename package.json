@@ -20,6 +20,8 @@
   "devDependencies": {
     "vows": "*",
     "mocha": "*",
+    "cucumis": "*",
+    "zombie": "*",
     "should": "*"
   },
   "engine": "node >= 0.6.6"

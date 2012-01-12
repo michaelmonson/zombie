@@ -11,11 +11,10 @@
     "socket.io": "*",
     "nconf": "*",
     "backbone": "*",
-    "inflections": "git://github.com/ifit/inflections.git",
     "natural": "*",
     "validator": "*",
     "everyauth": "*",
-    "mongoose-auth": "*"
+    "mongoose-auth": "*",
   },
   "devDependencies": {
     "vows": "*",

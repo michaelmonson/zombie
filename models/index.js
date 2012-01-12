@@ -1,7 +1,7 @@
 
 var fs = require('fs'), 
   files = fs.readdirSync(__dirname); 
-require('inflection');
+require('inflections');
     
 files.forEach(function(file) {
   if (file === 'index.js') { 

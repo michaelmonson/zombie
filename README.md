@@ -16,7 +16,7 @@ node-boilerplate takes html-boilerplate, express, connect, jade, mongoose, mongo
 
 The project is organized into a traditional mvc pattern.  
 
-- Models are in the `./models` directory.  By adding a reference in model.js to a new model, that model is initialized at boot.  Another advantage of this is that by include a single model instance, all models are available via something like `model.User`
+- Models are in the `./models` directory.  By adding a reference in model.js to a new model, that model is initialized at boot.  Another advantage of this is that by including a single model instance, all models are available via something like `model.User`
 - Views are in the `./views` directory and should be organized into directories and files that match their route files.
 - Controllers are are located in `./controllers`. By creating a new `controller.js` file, and exporting a paramerterless `init()` method, all routes are automatically initialized with no modifications to routes.js.
 

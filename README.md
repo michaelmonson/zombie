@@ -28,6 +28,7 @@ Other important files that have conventional meaning
 ###Tools of Choice
 
 - While most people will have a unique editor that they enjoy most (VIM, TextMate, etc), [Aptana 3](http://aptana.com/) is a great solution.
+-   > Aptana is a full-featured IDE, built on Eclipse.  It also has an integrated Terminal, debugger, and many other features.
 - [Supervisor](https://github.com/isaacs/node-supervisor) is a great tool to auto relaunch the application
 - [NodeInspector](https://github.com/dannycoates/node-inspector) is a great browser-based debugger if you can't log items out
 

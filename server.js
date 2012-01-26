@@ -1,10 +1,10 @@
 
-var everyauth = require('everyauth'),
-  , express = require('express'),
-  , mongooseAuth = require('mongoose-auth'),
-  , nconf = require('nconf'),
-  , io = require('socket.io'),
-  , util = require('util'),
+var everyauth = require('everyauth')
+  , express = require('express')
+  , mongooseAuth = require('mongoose-auth')
+  , nconf = require('nconf')
+  , io = require('socket.io')
+  , util = require('util')
   , db = require('./helpers/db');
 
 // Setup nconf to use (in-order), and item defined 

@@ -2,7 +2,7 @@
 var natural = require('natural'),
   nconf = require('nconf'),
   fs = require('fs');
-	
+
 // Start up the routes
 exports.init = function(app) {
   loadRoutes(app);
@@ -56,7 +56,7 @@ function initRootRoutes(app) {
   app.get('/', function (req, res) {
     res.render('home');
   });
-	
+
   app.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/');

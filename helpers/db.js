@@ -1,7 +1,7 @@
 
 var mongoose = require('mongoose')
   , nconf = require('nconf');
-	
+
 exports.connect = function() {
   var mongo_config = nconf.get('mongodb');
   if ( mongo_config ) {

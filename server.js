@@ -1,11 +1,11 @@
 
 var everyauth = require('everyauth'),
-  express = require('express'),
-  mongooseAuth = require('mongoose-auth'),
-  nconf = require('nconf'),
-  io = require('socket.io'),
-  util = require('util'),
-  db = require('./helpers/db');
+  , express = require('express'),
+  , mongooseAuth = require('mongoose-auth'),
+  , nconf = require('nconf'),
+  , io = require('socket.io'),
+  , util = require('util'),
+  , db = require('./helpers/db');
 
 // Setup nconf to use (in-order), and item defined 
 // in 4 will be overridden by the same definition in 1, 2 or 3 
@@ -23,8 +23,6 @@ nconf.file({
 nconf.defaults({
   'port': '80'
 });
-
-console.log(nconf.get('testVar'));
 
 // Connect to the DB
 db.connect();

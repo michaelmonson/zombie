@@ -4,6 +4,7 @@ var everyauth = require('everyauth'),
   mongooseAuth = require('mongoose-auth'),
   nconf = require('nconf'),
   io = require('socket.io'),
+  util = require('util'),
   db = require('./helpers/db');
 
 // Setup nconf to use (in-order), and item defined 
@@ -13,8 +14,11 @@ var everyauth = require('everyauth'),
 //  3. Values in `config.json`
 //  4. Default values   
 nconf.argv().env();
+
+var env = nconf.get('NODE_ENV') || 'development';
+
 nconf.file({
-  file : 'config/config-' + nconf.get('NODE_ENV') + '.json'
+  file : 'config/config-' + env + '.json'
 });
 nconf.defaults({
   'port': '80'

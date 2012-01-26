@@ -15,7 +15,9 @@
     "validator": "*",
     "everyauth": "*",
     "mongoose-auth": "*",
-    "inflections": "*"
+    "inflections": "*",
+    "hiredis": "*",
+    "redis": "*"
   },
   "devDependencies": {
     "vows": "*",

@@ -7,13 +7,14 @@
     "database": "tester",
     "port": 27017
   },
-  "reddis": {
+  "redis": {
     "host": "127.0.0.1",
-    "port": 6379
+    "port": 6379,
+    "options" : {}
   },
   "facebook": {
-  	"appId": "196550814144",
-  	"appSecret": "56ca861ab016bfd779d83d3660d74a48"
+    "appId": "196550814144",
+    "appSecret": "56ca861ab016bfd779d83d3660d74a48"
   },
   "googleAnalyticsId": "123456789"
 }

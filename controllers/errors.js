@@ -43,6 +43,9 @@ exports.init = function(app) {
          message = defaultError;
          log = defaultError;
       }
+      if (err instanceof Error) {
+        log += "\n" + err.stack;
+      }
       res.render('errors/500', { locals: { 
         title : 'The Server Encountered an Error',
         error: message},

@@ -17,4 +17,12 @@ watch:
 			--watch \
 			$(TESTS)
 
+new-project:
+	rm -rf .git
+	rm -rf README.md
+	touch README
+	git init
+	git add .
+	git commit -m "Initial commit"
+
 .PHONY: test watch

@@ -19,7 +19,8 @@ exports.init = function(app) {
 
   //setup the errors
   app.error(function(err, req, res, next) {
-     var defaultError = "An error occured.";
+    var defaultError = "An error occured."
+      , format;
     if (err instanceof NotFound) {
       res.render('errors/404', { locals: { 
         title : '404 - Not Found'
@@ -46,10 +47,18 @@ exports.init = function(app) {
       if (err instanceof Error) {
         log += "\n" + err.stack;
       }
-      res.render('errors/500', { locals: { 
-        title : 'The Server Encountered an Error',
-        error: message},
-        status: 500 });
+      format = res.hasOwnProperty("format") ? res.format : "html";
+      if (format == "json") {
+        res.json({error: message});
+      } else {
+        res.render('errors/500', {
+          locals: { 
+            title : 'The Server Encountered an Error',
+            error: message
+          },
+          status: 500
+        });
+      }
       console.log("ERROR: " + log);
     }
   });

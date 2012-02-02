@@ -23,7 +23,8 @@ The project is organized into a traditional mvc pattern.
 Other important files that have conventional meaning
 
 - `server.js` is the default name for starting the application.  This comes from Joyent's cloud server default configuration.
-- `packages.js` holds all the dependencies for the project.  Any packages references in code should be initialized through here, and not installed globally
+- `index.js` is the file that will be included when the project is used as a submodule. Expose any API methods here.
+- `package.json` holds all the dependencies for the project.  Any packages references in code should be initialized through here, and not installed globally
 
 ###Tools of Choice
 
@@ -55,7 +56,7 @@ Declare new variables with commas on the same line. This goes against most node.
     var util = require('util'),
       express = require('express');
 
-Curly braces should be inline, eq `exports.myFunc = new function(){`. They should not be declared on a separate line.
+Curly braces should be inline, eq `exports.myFunc = new function() {`. They should not be declared on a separate line.
 	
 In general, everything should conform to JSLint tests where possible.
 
@@ -63,8 +64,7 @@ In general, everything should conform to JSLint tests where possible.
     
     git clone git@github.com:ifit/node-boilerplate.git mynewproject
     cd mynewproject
-    rm -rf .git README.md
-    npm install
+    make new-project
     
 This will copy all of the required project files, and remove the reference to this git repo so you can start your own, and install the required packages
 
@@ -93,5 +93,4 @@ Go to http://localhost:3000 and login via facebook or local.  Once you are logge
 
 1. Cleanup HTML5 Boilerplate and CSS includes to not be so intrusive
 2. Documentation generator
-3. Basic REDIS implementation (a cache would be a good starting point)
-4. ...
+3. ...

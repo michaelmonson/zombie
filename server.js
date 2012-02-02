@@ -5,24 +5,8 @@ var everyauth = require('everyauth')
   , nconf = require('nconf')
   , io = require('socket.io')
   , util = require('util')
-  , db = require('./helpers/db');
-
-// Setup nconf to use (in-order), and item defined 
-// in 4 will be overridden by the same definition in 1, 2 or 3 
-//  1. Command-line arguments
-//  2. Environment variables
-//  3. Values in `config.json`
-//  4. Default values   
-nconf.argv().env();
-
-var env = nconf.get('NODE_ENV') || 'development';
-
-nconf.file({
-  file : 'config/config-' + env + '.json'
-});
-nconf.defaults({
-  'port': '80'
-});
+  , db = require('./helpers/db')
+  , conf = require('./conf');
 
 // Connect to the DB
 db.connect();

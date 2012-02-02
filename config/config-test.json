@@ -3,7 +3,7 @@
   "sessionSecret": "dontcallmedaughternotfairtome",
   "mongodb": {
     "host": "127.0.0.1",
-    "database": "dev",
+    "database": "test",
     "port": 27017
   },
   "redis": {

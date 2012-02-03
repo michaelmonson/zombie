@@ -21,8 +21,8 @@ new-project:
 	rm -rf .git
 	rm -rf README.md
 	touch README
-	NAME=`pwd | tr '/' '\n' | tail -1`
-	sed -i s/YOUR-REPO-NAME/$$$$NAME/g `find .`
+	sed -i s/bptest/`pwd | tr '/' '\n' \
+	| tail -1 | tr -d '\n'`/g `find . -type f`
 	npm install
 	mkdir public/images
 	git init

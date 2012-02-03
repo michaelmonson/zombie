@@ -15,5 +15,7 @@ nconf.file({
   file: __dirname + '/config/config-' + env + '.json'
 });
 nconf.defaults({
-  'port': '80'
+  "YOUR-REPO-NAME": {
+    'port': '80'
+  }
 });

@@ -45,11 +45,10 @@ function initHelpers(app) {
   new natural.NounInflector().attach();
   app.dynamicHelpers ({
     googleAnalyticsId: function () {
-      return nconf.get('googleAnalyticsId');
+      return nconf.get('YOUR-REPO-NAME').googleAnalyticsId;
     }
   });
 }
-
 
 // Init the base routes of the application
 function initRootRoutes(app) {

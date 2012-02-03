@@ -4,12 +4,12 @@ var mongoose = require('mongoose')
   , nconf = require('nconf');
 
 var connect = function() {
-  var mongo_config = nconf.get('mongodb');
-  if (mongo_config) {
+  var mongoConfig = nconf.get('YOUR-REPO-NAME').mongodb;
+  if (mongoConfig) {
     // Start the mongo connection
-    mongoose.connect(mongo_config.host,
-      mongo_config.database,
-      mongo_config.port);
+    mongoose.connect(mongoConfig.host,
+                     mongoConfig.database,
+                     mongoConfig.port);
   }
 };
 

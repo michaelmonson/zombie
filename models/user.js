@@ -20,8 +20,8 @@ UserSchema.plugin(mongooseAuth, {
   , facebook: {
       everyauth: {
           myHostname: 'http://localhost:3000'
-        , appId: nconf.get('facebook').appId
-        , appSecret: nconf.get('facebook').appSecret
+        , appId: nconf.get('YOUR-REPO-NAME').facebook.appId
+        , appSecret: nconf.get('YOUR-REPO-NAME').facebook.appSecret
         , redirectPath: '/user/chat'
       }
     }

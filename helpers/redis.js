@@ -27,7 +27,7 @@ var RedisClient = function() {
     options: {}
   };
 
-  var conf = nconf.get("redis") || defaults
+  var conf = nconf.get('YOUR-REPO-NAME').redis || defaults
     , port = conf.port
     , host = conf.host
     , options = conf.options

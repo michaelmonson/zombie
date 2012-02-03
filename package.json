@@ -3,6 +3,7 @@
   "description": "YOUR PROJECT DESCRIPTION HERE",
   "author": "YOUR NAME <your@emailaddress.com>",
   "version": "0.0.1",
+  "private": true,
   "dependencies": {
     "connect": "*",
     "express": "*",

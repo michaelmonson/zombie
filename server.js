@@ -47,7 +47,7 @@ app.configure('production', function() {
 require('./controllers').init(app);
 
 // Start the server
-app.listen(nconf.get('port'));
+app.listen(nconf.get('YOUR-REPO-NAME').port);
 
 //Setup Socket.IO
 var io = io.listen(app);
@@ -62,4 +62,5 @@ io.sockets.on('connection', function(socket) {
   });
 });
 
-console.log('Listening on http://localhost:' + nconf.get('port'));
+console.log('Listening on http://localhost:' +
+            nconf.get('YOUR-REPO-NAME').port);

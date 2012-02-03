@@ -2,31 +2,27 @@
 var everyauth = require('everyauth')
   , express = require('express')
   , mongooseAuth = require('mongoose-auth')
-  , nconf = require('nconf')
+  , nconf = require('./config') 
   , io = require('socket.io')
   , util = require('util')
-  , db = require('./helpers/db')
-  , conf = require('./conf');
+  , model = require('./models')
+  , controllers = require('./controllers')
+  , port = nconf.get('port') || 3000
+  , app = express.createServer();
 
-// Connect to the DB
-db.connect();
+module.exports = app;
 
-// Set up the models
-var model = require('./models');
-
-// Setup and configure the application
-var app = express.createServer();
-app.use(express.bodyParser());
 app.use(express.static(__dirname + "/public"));
+app.use(express.bodyParser());
 app.use(express.cookieParser());
 app.use(express.session({secret : 'esoognom'}));
-app.use(mongooseAuth.middleware());
+// app.use(mongooseAuth.middleware()); // this line is failing.
 
 // Config for every environment
 app.configure(function() {
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
-  mongooseAuth.helpExpress(app);
+//  mongooseAuth.helpExpress(app); // so is this line
 });
 
 // Config for dev and test environments
@@ -44,10 +40,10 @@ app.configure('production', function() {
 });
 
 // Setup the controllers (routes)
-require('./controllers').init(app);
+controllers.init(app);
 
 // Start the server
-app.listen(nconf.get('port'));
+app.listen(port);
 
 //Setup Socket.IO
 var io = io.listen(app);
@@ -62,4 +58,5 @@ io.sockets.on('connection', function(socket) {
   });
 });
 
-console.log('Listening on http://localhost:' + nconf.get('port'));
+console.log('Listening on http://localhost:' + port);
+

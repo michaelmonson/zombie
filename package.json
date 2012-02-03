@@ -8,6 +8,7 @@
     "express": "*",
     "jade": "*",
     "mongoose": "*",
+    "express-mongoose": "*",
     "socket.io": "*",
     "nconf": "*",
     "backbone": "*",
@@ -23,8 +24,14 @@
     "vows": "*",
     "mocha": "*",
     "cucumis": "*",
+    "kyuri": "git://github.com/capnregex/kyuri.git",
     "zombie": "*",
     "should": "*"
   },
-  "engine": "node >= 0.6.6"
+  "scripts": {
+    "test": "mocha",
+    "features": "./node_modules/.bin/kyuri features"
+  },
+  "engine": "node >= 0.6.6",
+  "main": "./index"
 }

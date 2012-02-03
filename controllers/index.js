@@ -1,64 +1,36 @@
 
-var natural = require('natural'),
-  nconf = require('nconf'),
-  fs = require('fs');
+var conf = require('../config'),
+  fs = require('fs'),
+  files = fs.readdirSync(__dirname), 
+  root = {};
 
-// Start up the routes
-exports.init = function(app) {
-  loadRoutes(app);
-  initHelpers(app);
-  initRootRoutes(app);
-}
-
-// Get a list of all route and init each one
-function loadRoutes(app) {
-  // load up all the routes
-  fs.readdir(__dirname, function(err, files){
-    if (err) throw err;
-    files.forEach(function(file){
-      loadRoute(app, file);
-    });
-  });
-}
-
-// Load and initialize an individual route file
-function loadRoute(app, file) {
-  var name, route, match = /^([a-z_]*)\.js$/.exec(file);
+// Load each Controller module
+files.forEach(function (file) {
+  var name, match = /^([a-z_]*)\.js$/.exec(file);
   if ( match ) {
     name = match[1];
-    if(name == 'index') return; // Don't include this file
+    if(name === 'index') { return; } // Don't include this file
+    exports[name] = require('./' + file);  // Load the controller 
+  }
+});
 
-    // Load the route and call the init function if there is one
-    var route = require('./' + name);  
-    Object.keys(route).map(function(action){
-      switch(action) {
-        case 'init':
-          route.init(app);
-          break;
-      }
-    });
+function initController(app, name) {
+  var controller = exports[name];
+  if (controller) {
+    if (typeof(controller.init) === 'function') {
+      controller.init(app);
+    }
   }
 }
 
-// Dynamic Helpers
-function initHelpers(app) {
-  new natural.NounInflector().attach();
-  app.dynamicHelpers ({
-    googleAnalyticsId: function () {
-      return nconf.get('googleAnalyticsId');
-    }
+// init each controller
+exports.init = function(app) {
+  Object.keys(exports).map(function(name){
+    if (name === 'init') { return; } // not interested in ourselves
+    if (name === 'root') { return; } // root goes last
+    initController(app, name);
   });
+  initController(app, 'root'); // root goes last
 }
 
 
-// Init the base routes of the application
-function initRootRoutes(app) {
-  app.get('/', function (req, res) {
-    res.render('home');
-  });
-
-  app.get('/logout', function (req, res) {
-    req.logout();
-    res.redirect('/');
-  });
-}

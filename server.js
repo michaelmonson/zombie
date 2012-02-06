@@ -1,4 +1,3 @@
-
 var everyauth = require('everyauth')
   , express = require('express')
   , mongooseAuth = require('mongoose-auth')

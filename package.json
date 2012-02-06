@@ -1,38 +1,36 @@
 {
-  "YOUR-REPO-NAME": {
-    "name": "YOUR-REPO-NAME",
-    "description": "YOUR PROJECT DESCRIPTION HERE",
-    "author": "YOUR NAME <your@emailaddress.com>",
-    "version": "0.0.1",
-    "private": true,
-    "main": "index.js",
-    "dependencies": {
-      "connect": "*",
-      "express": "*",
-      "jade": "*",
-      "mongoose": "*",
-      "express-mongoose": "*",
-      "socket.io": "*",
-      "nconf": "*",
-      "backbone": "*",
-      "natural": "*",
-      "validator": "*",
-      "everyauth": "*",
-      "mongoose-auth": "*",
-      "inflections": "*",
-      "hiredis": "*",
-      "redis": "*"
-    },
-    "devDependencies": {
-      "vows": "*",
-      "mocha": "*",
-      "cucumis": "*",
-      "zombie": "*",
-      "should": "*"
-    },
-    "scripts": {
-      "test": "mocha"
-    },
-    "engine": "node >= 0.6.6"
-  }
+  "name": "YOUR-REPO-NAME",
+  "description": "YOUR PROJECT DESCRIPTION HERE",
+  "author": "YOUR NAME <your@emailaddress.com>",
+  "version": "0.0.1",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "connect": "*",
+    "express": "*",
+    "jade": "*",
+    "mongoose": "*",
+    "express-mongoose": "*",
+    "socket.io": "*",
+    "nconf": "*",
+    "backbone": "*",
+    "natural": "*",
+    "validator": "*",
+    "everyauth": "*",
+    "mongoose-auth": "*",
+    "inflections": "*",
+    "hiredis": "*",
+    "redis": "*"
+  },
+  "devDependencies": {
+    "vows": "*",
+    "mocha": "*",
+    "cucumis": "*",
+    "zombie": "*",
+    "should": "*"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "engine": "node >= 0.6.6"
 }

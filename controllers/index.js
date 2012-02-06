@@ -1,5 +1,6 @@
 
 var nconf = require('../config')
+  , config = nconf.get('YOUR-REPO-NAME')
   , natural = require('natural')
   , fs = require('fs')
   , files = fs.readdirSync(__dirname);
@@ -28,7 +29,7 @@ var initHelpers = function(app) {
   new natural.NounInflector().attach();
   app.dynamicHelpers({
     googleAnalyticsId: function () {
-      return nconf.get('YOUR-REPO-NAME').googleAnalyticsId;
+      return config.googleAnalyticsId;
     }
   });
 };

@@ -18,11 +18,5 @@ nconf.file({
   'file': filename
 });
 
-nconf.defaults({
-  'YOUR-REPO-NAME': {
-    'port': '80'
-  }
-});
-
 module.exports = nconf;
 

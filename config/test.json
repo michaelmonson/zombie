@@ -1,5 +1,5 @@
 {
-  "YOUR-REPO-NAME":
+  "YOUR-REPO-NAME": {
     "port": "3000",
     "sessionSecret": "dontcallmedaughternotfairtome",
     "mongodb": {

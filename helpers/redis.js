@@ -1,6 +1,13 @@
 var redis = require('redis')
   , util = require('util')
-  , nconf = require('nconf');
+  , nconf = require('../config')
+  , config = nconf.get('YOUR-REPO-NAME')
+  , defaults = {
+      port: 6379,
+      host: "127.0.0.1",
+      options: {}
+    }
+  , redisConf = config.redis || defaults;
 
 /***************************
  * RedisError class
@@ -20,17 +27,9 @@ RedisError.prototype = new Error();
 var RedisClient = function() {
   this.client = null;
 
-  // use these if not present in nconf
-  var defaults = {
-    port: 6379,
-    host: "127.0.0.1",
-    options: {}
-  };
-
-  var conf = nconf.get('YOUR-REPO-NAME').redis || defaults
-    , port = conf.port
-    , host = conf.host
-    , options = conf.options
+  var port = redisConf.port
+    , host = redisConf.host
+    , options = redisConf.options
     , self = this; // keep reference to this for closures
 
   // create a client and make appropriate bindings

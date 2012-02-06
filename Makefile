@@ -1,21 +1,18 @@
 TESTS = test/*.js
 
-test:
+test: mocha cuke
+
+mocha:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
-			--require should \
-			--reporter list \
-			--slow 20 \
-			--growl \
 			$(TESTS)
-			
+
 watch:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
-			--require should \
-			--reporter list \
-			--slow 20 \
-			--growl \
 			--watch \
 			$(TESTS)
+
+cuke:
+	@NODE_ENV=test ./node_modules/.bin/kyuri features
 
 new-project:
 	rm -rf .git
@@ -29,4 +26,4 @@ new-project:
 	git add .
 	git commit -m "Initial commit"
 
-.PHONY: test watch
+.PHONY: test watch cuke

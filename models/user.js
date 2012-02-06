@@ -1,12 +1,9 @@
 var mongoose = require('mongoose')
-  , mongooseAuth = require('mongoose-auth')
   , nconf = require('nconf')
   , Schema = mongoose.Schema
   , ObjectId = mongoose.SchemaTypes.ObjectId;
 
-// Set up the schema
-var UserSchema = new Schema({})
-  , User;
+/* uncomment this section if your app needs user authentication
 
 // Setup authentication plugins to use local and FB
 UserSchema.plugin(mongooseAuth, {
@@ -46,6 +43,6 @@ UserSchema.plugin(mongooseAuth, {
     }
 });
 
-
 // Register the model into mogoose, and pass that as the exports
 module.exports = User = mongoose.model('User', UserSchema);
+*/

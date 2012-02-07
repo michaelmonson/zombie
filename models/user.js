@@ -1,9 +1,11 @@
 var mongoose = require('mongoose')
-  , nconf = require('nconf')
+  , mongooseAuth = require('mongoose-auth')
+  , nconf = require('../config')
+  , config = nconf.get('YOUR-REPO-NAME')
   , Schema = mongoose.Schema
-  , ObjectId = mongoose.SchemaTypes.ObjectId;
-
-/* uncomment this section if your app needs user authentication
+  , ObjectId = mongoose.SchemaTypes.ObjectId
+  , UserSchema = new Schema({})
+  , User;
 
 // Setup authentication plugins to use local and FB
 UserSchema.plugin(mongooseAuth, {
@@ -17,8 +19,8 @@ UserSchema.plugin(mongooseAuth, {
   , facebook: {
       everyauth: {
           myHostname: 'http://localhost:3000'
-        , appId: nconf.get('YOUR-REPO-NAME').facebook.appId
-        , appSecret: nconf.get('YOUR-REPO-NAME').facebook.appSecret
+        , appId: config.facebook.appId
+        , appSecret: config.facebook.appSecret
         , redirectPath: '/user/chat'
       }
     }
@@ -45,4 +47,3 @@ UserSchema.plugin(mongooseAuth, {
 
 // Register the model into mogoose, and pass that as the exports
 module.exports = User = mongoose.model('User', UserSchema);
-*/

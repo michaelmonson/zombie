@@ -1,4 +1,3 @@
-
 var nconf = require('../config')
   , config = nconf.get('YOUR-REPO-NAME')
   , natural = require('natural')
@@ -7,7 +6,7 @@ var nconf = require('../config')
 
 // Load each Controller module
 files.forEach(function (file) {
-  var name, match = /^([a-z_]*)\.js$/.exec(file);
+  var name, match = /^([A-Za-z_]*)\.js$/.exec(file);
   if (match) {
     name = match[1];
     if (name === 'index') { return; } // Don't include this file
@@ -30,8 +29,31 @@ var initHelpers = function(app) {
   app.dynamicHelpers({
     googleAnalyticsId: function () {
       return config.googleAnalyticsId;
+    },
+    url: function(req, res) {
+      return req.url;
+    },
+    menu: function(req, res) {
+      var menu;
+      if (res.hasOwnProperty('menu')) {
+         menu = res.menu;
+      } else if (req.hasOwnProperty('user')) {
+        menu = {
+          "/": "Home",
+          "/logout": "Logout"
+        };
+      } else {
+        menu = {
+          "/": "Home",
+          "/register": "Register",
+          "/login": "Login",
+          "/auth/facebook": "<img src=\"/img/facebook-connect-button.png\" />"
+        };
+      }
+      return menu;
     }
   });
+
 };
 
 // init each controller
@@ -43,5 +65,5 @@ exports.init = function(app) {
   });
   initController(app, 'root'); // root goes last
   initHelpers(app);
-}
+};
 

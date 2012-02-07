@@ -11,18 +11,31 @@ var everyauth = require('everyauth')
 
 module.exports = app;
 
+app.configure('development', function() {
+  app.use(function(req, res, next) {
+     if (req.url.match(/img|images/)) {
+        res.header("Cache-Control", "max-age=3600, must-revalidate");
+     } else {
+        res.header("Cache-Control", "no-cache");
+        res.header("Pragma", "no-cache");
+        res.header("Expires", "Thu, 19 Nov 1981 08:52:00 GMT");
+     }
+     next();
+  });
+});
+
 app.use(express.static(__dirname + "/public"));
 app.use(express.bodyParser());
 app.use(express.cookieParser());
 app.use(express.session({secret : 'esoognom'}));
-// app.use(mongooseAuth.middleware()); // this line is failing.
-
+app.use(mongooseAuth.middleware());
 // Config for every environment
 app.configure(function() {
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
-//  mongooseAuth.helpExpress(app); // so is this line
+  mongooseAuth.helpExpress(app);
 });
+
 
 // Config for dev and test environments
 app.configure('development', 'test', function() {

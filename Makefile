@@ -1,6 +1,6 @@
 TESTS = test/*.js
 
-test: mocha cuke
+test: mocha
 
 mocha:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
@@ -11,14 +11,23 @@ watch:
 			--watch \
 			$(TESTS)
 
-cuke:
-	@NODE_ENV=test ./node_modules/.bin/kyuri features
+run:
+	./watch.sh
+
+less-watch: less
+	@sleep 100000000
+
+less:
+	@echo -n compiling css...
+	@lessc -x public/less/main.less public/css/style.css
+	@rm -f public/css/tmp.less
+	@echo done
 
 new-project:
 	rm -rf .git
 	rm -rf README.md
 	touch README
-	sed -i s/bptest/`pwd | tr '/' '\n' \
+	sed -i s/YOUR-REPO-NAME/`pwd | tr '/' '\n' \
 	| tail -1 | tr -d '\n'`/g `find . -type f`
 	npm install
 	mkdir public/images
@@ -26,4 +35,4 @@ new-project:
 	git add .
 	git commit -m "Initial commit"
 
-.PHONY: test watch cuke
+.PHONY: test watch

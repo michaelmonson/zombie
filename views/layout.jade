@@ -1,13 +1,50 @@
 !!! 5
 html
   head
-    script(src='http://static.ak.fbcdn.net/connect/en_US/core.js')
+    link(type='text/css',rel='stylesheet',href='/css/style.css')
   body
+    script(src='http://static.ak.fbcdn.net/connect/en_US/core.js')
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
     script
       window.jQuery || document.write('<script src="/js/libs/jquery-1.7.1.min.js"><\\/script>')
-    //-script(defer, src='js/plugins.js')
-    script(defer, src='/js/script.js')
     script(defer, src='/socket.io/socket.io.js')
-    #main
-      != body
+    script(defer, src='/js/script.js')
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+          a.btn.btn-navbar(data-toggle="collapse",data-target=".nav-collapse")
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.brand(href='#') YOUR-REPO-NAME
+          .nav-collapse
+            ul.nav
+              each name,path in menu
+                if url == path
+                  li.active
+                    a(href=path)!=name
+                else
+                  li
+                    a(href=path)!=name
+            - if (everyauth.facebook)
+              p.navbar-text.pull-right Logged in as #{everyauth.facebook.user.username}
+            - else if (everyauth.user && everyauth.user.name)
+              p.navbar-text.pull-right Logged in as #{everyauth.user.name.first} #{everyauth.user.name.last}
+              
+    #main.container-fluid
+      .row-fluid
+        .span3
+          .well.sidebar-nav
+            ul.nav.nav-list
+              li.nav-header Sidebar
+              li.active
+                a(href="#") Link
+              li
+                a(href="#") Link
+              li
+                a(href="#") Link
+              li
+                a(href="#") Link
+        .span9
+          !=body
+    script(src='/js/lib/bootstrap.min.js')

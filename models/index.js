@@ -22,7 +22,7 @@ db = mongoose.connect(mongoConfig.host,
 
 // Load each Model module
 files.forEach(function(file) {
-  var name, model, match = /^([a-z_]+)\.js$/.exec(file);
+  var name, model, match = /^([A-Za-z_]+)\.js$/.exec(file);
   if(file === 'index.js') { return; } // Don't include this file
   if (match) {
     name = match[1].classify().toString();

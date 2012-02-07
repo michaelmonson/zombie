@@ -6,21 +6,23 @@
   "private": true,
   "main": "index.js",
   "dependencies": {
-    "connect": "*",
-    "express": "*",
-    "jade": "*",
-    "mongoose": "*",
-    "express-mongoose": "*",
-    "socket.io": "*",
-    "nconf": "*",
     "backbone": "*",
-    "natural": "*",
-    "validator": "*",
+    "connect": "*",
     "everyauth": "*",
-    "mongoose-auth": "*",
-    "inflections": "*",
+    "express": "*",
+    "express-mongoose": "*",
     "hiredis": "*",
-    "redis": "*"
+    "inflections": "*",
+    "jade": "*",
+    "less": "*",
+    "mongoose": "*",
+    "mongoose-auth": "*",
+    "natural": "*",
+    "nconf": "*",
+    "redis": "*",
+    "socket.io": "*",
+    "supervisor": "*",
+    "validator": "*"
   },
   "devDependencies": {
     "vows": "*",
@@ -28,9 +30,6 @@
     "cucumis": "*",
     "zombie": "*",
     "should": "*"
-  },
-  "scripts": {
-    "test": "mocha"
   },
   "engine": "node >= 0.6.6"
 }

@@ -44,6 +44,7 @@ Other important files that have conventional meaning
 - [nConf](https://github.com/flatiron/nconf) - Node configuration helper
 - [Mocha](http://visionmedia.github.com/mocha/) - Unit testing framework
 - [Should](https://github.com/visionmedia/should.js) - Helper module to BDD assertions
+- [Less](http://lesscss.org/) - Less css compiler
 
 ###Code format
 
@@ -73,7 +74,8 @@ This will copy all of the required project files, and remove the reference to th
 
 Make sure that you have a mongoDB service running, if it is not running by default enter `mongod` into a terminal window
 
-In a seperate terminal window start the server by entering `node server.js`
+In a seperate terminal window start the server by entering `make run`
+This will start the supervisor that will start the server.
 
 Go to http://localhost:3000 and login via facebook or local.  Once you are logged in you can send simple chat messages to yourself.
 
@@ -91,6 +93,5 @@ Go to http://localhost:3000 and login via facebook or local.  Once you are logge
 
 ###ToDo's:
 
-1. Cleanup HTML5 Boilerplate and CSS includes to not be so intrusive
-2. Documentation generator
-3. ...
+-  Documentation generator
+-  ...

@@ -18,5 +18,10 @@ nconf.file({
   'file': filename
 });
 
+nconf.defaults({
+  'NODE_ENV': env,
+  'env': env
+});
+
 module.exports = nconf;
 

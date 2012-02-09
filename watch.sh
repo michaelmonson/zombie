@@ -8,10 +8,11 @@ on_die() {
   exit
 }
 
-supervisor -e "less|css" -w public/less -x make less-watch &
+SUPERVISOR=./node_modules/.bin/supervisor
+$SUPERVISOR -e "less|css" -w public/less -x make less-watch &
 LESS_PID=$!
 
-supervisor server.js &
+$SUPERVISOR server.js &
 SERVER_PID=$!
 
 trap 'on_die' SIGINT

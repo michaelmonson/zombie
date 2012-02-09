@@ -8,6 +8,7 @@
   "dependencies": {
     "backbone": "*",
     "connect": "*",
+    "connect-redis": "*",
     "everyauth": "*",
     "express": "*",
     "express-mongoose": "*",

@@ -19,20 +19,27 @@ less-watch: less
 
 less:
 	@echo -n compiling css...
-	@lessc -x public/less/main.less public/css/style.css
+	@./node_modules/.bin/lessc -x public/less/main.less public/css/style.css
 	@rm -f public/css/tmp.less
 	@echo done
 
-new-project:
+new-project: clean install git-init
+
+clean:
 	rm -rf .git
 	rm -rf README.md
+
+install:
 	touch README
-	sed -i s/YOUR-REPO-NAME/`pwd | tr '/' '\n' \
-	| tail -1 | tr -d '\n'`/g `find . -type f`
+	sed -i="" s/YOUR-REPO-NAME/`pwd | tr '/' '\n' \
+	  | tail -1 | tr -d '\n'`/g `find . -type f`
 	npm install
 	mkdir public/images
+
+git-init:
 	git init
 	git add .
 	git commit -m "Initial commit"
 
+fix-config:
 .PHONY: test watch

@@ -93,5 +93,6 @@ Go to http://localhost:3000 and login via facebook or local.  Once you are logge
 
 ###ToDo's:
 
--  Documentation generator
--  ...
+- Documentation generator
+- Javascript Compiler
+- ...

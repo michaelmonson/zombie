@@ -34,7 +34,6 @@ var RedisClient = function() {
 
   // create a client and make appropriate bindings
   var createClient = function() {
-    console.log("Creating new redis client.");
     self.client = redis.createClient(port, host, options);
 
     // throw errors for express to catch
@@ -43,13 +42,8 @@ var RedisClient = function() {
                            "REDIS ERROR: " + err);
     });
 
-    self.client.on("ready", function() {
-      console.log("Redis client ready.");
-    });
-
-    self.client.on("end", function() {
+   self.client.on("end", function() {
       // If the client closes, open a new one.
-      console.log("Redis connection closed, re-opening.");
       createClient.call(self);
     });
   };

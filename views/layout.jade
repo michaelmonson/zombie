@@ -33,18 +33,20 @@ html
               
     #main.container-fluid
       .row-fluid
-        .span3
-          .well.sidebar-nav
-            ul.nav.nav-list
-              li.nav-header Sidebar
-              li.active
-                a(href="#") Link
-              li
-                a(href="#") Link
-              li
-                a(href="#") Link
-              li
-                a(href="#") Link
-        .span9
-          !=body
+        if (typeof(subnav) != 'undefined')
+          .span2.fixed
+            .well.sidebar-nav
+              ul.nav.nav-list
+                each name,path in subnav
+                  if url == path
+                    li.active
+                      a(href=path)!=name
+                  else
+                    li
+                      a(href=path)!=name
+          .span10
+            !=body
+        else
+          .span12
+            !=body
     script(src='/js/lib/bootstrap.min.js')

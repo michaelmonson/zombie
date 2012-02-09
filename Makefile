@@ -38,14 +38,14 @@ git-init:
 
 Linux-install:
 	sed -i s/YOUR-REPO-NAME/`pwd | tr '/' '\n' \
-	| tail -1 | tr -d '\n'`/g `find . -type f`
+	| tail -1 | tr -d '\n'`/g `find . -type f | grep -v Makefile`
 	touch README
 	npm install
 	npm install mongodb --mongodb:native
 
 Darwin-install:
 	sed -i "" s/YOUR-REPO-NAME/`pwd | tr '/' '\n' \
-	| tail -1 | tr -d '\n'`/g `find . -type f`
+	| tail -1 | tr -d '\n'`/g `find . -type f | grep -v Makefile`
 	touch README
 	npm install
 	npm install mongodb --mongodb:native

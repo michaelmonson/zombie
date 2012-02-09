@@ -1,7 +1,7 @@
 {
   "YOUR-REPO-NAME": {
     "port": "3000",
-    "sessionSecret": "dontcallmedaughternotfairtome",
+    "sessionSecret": "SESSION-SECRET",
     "mongodb": {
       "host": "127.0.0.1",
       "database": "test",

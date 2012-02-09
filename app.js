@@ -12,7 +12,6 @@ var everyauth = require('everyauth')
 
 module.exports = app;
 
-// Do not allow caching while in dev mode
 app.configure('development', function() {
   app.use(function(req, res, next) {
     if (req.url.match(/img|images/)) {
@@ -42,7 +41,7 @@ app.configure('test', 'production', function() {
     , store = new RedisStore(config.redis);
 
   app.use(express.cookieParser());
-  app.use(express.session({ secret: "keyboard cat", store: store }));
+  app.use(express.session({ secret: config.sessionSecret, store: store }));
 });
 
 // Config for every environment

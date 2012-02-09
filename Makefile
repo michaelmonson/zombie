@@ -1,6 +1,7 @@
 TESTS = test/*.js
 SHELL := /bin/bash
 OS = $(shell uname)
+HASH = $(shell cat /dev/urandom | head -c 100 | shasum | awk '{print $$1}' | tr -d '\n')
 
 test: mocha
 
@@ -25,7 +26,7 @@ less:
 	@rm -f public/css/tmp.less
 	@echo done
 
-new-project: clean ${OS}-install git-init
+new-project: clean ${OS}-install install git-init
 
 clean:
 	rm -rf .git
@@ -39,13 +40,14 @@ git-init:
 Linux-install:
 	sed -i s/YOUR-REPO-NAME/`pwd | tr '/' '\n' \
 	| tail -1 | tr -d '\n'`/g `find . -type f | grep -v Makefile`
-	touch README
-	npm install
-	npm install mongodb --mongodb:native
+	sed -i s/SESSION-SECRET/${HASH}/g `find ./config | grep json`
 
 Darwin-install:
 	sed -i "" s/YOUR-REPO-NAME/`pwd | tr '/' '\n' \
 	| tail -1 | tr -d '\n'`/g `find . -type f | grep -v Makefile`
+	sed -i "" s/SESSION-SECRET/${HASH}/g `find ./config | grep json`
+
+install:
 	touch README
 	npm install
 	npm install mongodb --mongodb:native

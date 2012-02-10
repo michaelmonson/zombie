@@ -26,7 +26,7 @@ less:
 	@rm -f public/css/tmp.less
 	@echo done
 
-new-project: clean ${OS}-install install git-init
+new-project: clean install git-init
 
 clean:
 	rm -rf .git
@@ -37,17 +37,19 @@ git-init:
 	git add .
 	git commit -m "Initial commit"
 
+update: install
+
+install: ${OS}-install
+	touch README
+	npm install
+	npm install mongodb --mongodb:native
+
 Linux-install:
 	sed -i s/YOUR-REPO-NAME/`pwd | tr '/' '\n' \
-	| tail -1 | tr -d '\n'`/g `find . -type f | grep -v Makefile | grep -v .git`
+		| tail -1 | tr -d '\n'`/g `find . -type f | grep -v Makefile | grep -v .git`
 	sed -i s/SESSION-SECRET/${HASH}/g `find ./config | grep json | grep -v .git`
 
 Darwin-install:
 	sed -i "" s/YOUR-REPO-NAME/`pwd | tr '/' '\n' \
-	| tail -1 | tr -d '\n'`/g `find . -type f | grep -v Makefile | grep -v .git`
+		| tail -1 | tr -d '\n'`/g `find . -type f | grep -v Makefile | grep -v .git`
 	sed -i "" s/SESSION-SECRET/${HASH}/g `find ./config | grep json | grep -v .git`
-
-install:
-	touch README
-	npm install
-	npm install mongodb --mongodb:native

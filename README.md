@@ -79,6 +79,15 @@ This will start the supervisor that will start the server.
 
 Go to http://localhost:3000 and login via facebook or local.  Once you are logged in you can send simple chat messages to yourself.
 
+###To update to the latest boilerplate
+
+When you want to bring your repo to the latest boilerplate code, run the following:
+
+    git fetch git://github.com/ifit/node-boilerplate.git master:node-boilerplate-updates
+    git checkout <your-working-repo>
+    git merge node-boilerplate-updates
+    # merge any conflicts
+    make update
 
 ###Additional Features:
 

@@ -1,7 +1,6 @@
 var mongoose = require('mongoose')
   , mongooseAuth = require('mongoose-auth')
-  , nconf = require('../config')
-  , config = nconf.get('YOUR-REPO-NAME')
+  , config = require('../config')
   , Schema = mongoose.Schema
   , ObjectId = mongoose.SchemaTypes.ObjectId
   , UserSchema = new Schema({})

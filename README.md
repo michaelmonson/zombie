@@ -23,6 +23,7 @@ The project is organized into a traditional mvc pattern.
 Other important files that have conventional meaning
 
 - `server.js` is the default name for starting the application.  This comes from Joyent's cloud server default configuration.
+- `app.js` is the application setup for express and middleware.
 - `index.js` is the file that will be included when the project is used as a submodule. Expose any API methods here.
 - `package.json` holds all the dependencies for the project.  Any packages references in code should be initialized through here, and not installed globally
 

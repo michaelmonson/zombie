@@ -1,7 +1,6 @@
 var mongoose = require('mongoose')
   , inflections = require('inflections')
-  , nconf = require('../config')
-  , config = nconf.get('YOUR-REPO-NAME')
+  , config = require('../config')
   , fs = require('fs')
   , files = fs.readdirSync(__dirname)
   , defaults

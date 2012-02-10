@@ -1,5 +1,4 @@
-var nconf = require('../config')
-  , config = nconf.get('YOUR-REPO-NAME')
+var config = require('../config')
   , natural = require('natural')
   , fs = require('fs')
   , files = fs.readdirSync(__dirname);

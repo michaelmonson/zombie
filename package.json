@@ -19,7 +19,6 @@
     "mongoose": "*",
     "mongoose-auth": "*",
     "natural": "*",
-    "nconf": "*",
     "redis": "*",
     "socket.io": "*",
     "supervisor": "*",

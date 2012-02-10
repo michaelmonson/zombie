@@ -1,27 +1,29 @@
-// Setup nconf to use (in-order), and item defined
-// in 4 will be overridden by the same definition in 1, 2 or 3
+// Setup config to use in order:
 //  1. Command-line arguments
 //  2. Environment variables
 //  3. Values in `config.json`
-//  4. Default values
 
-var nconf = require('nconf')
+var optimist = require('optimist')
+  , argv = optimist.argv
   , env
-  , filename;
+  , filename
+  , config;
 
-nconf.argv().env();
+if (argv.hasOwnProperty('env')) {
+  env = argv.env;
+} else if (typeof process.env.NODE_ENV === 'string') {
+  env = process.env.NODE_ENV;
+} else {
+  env = 'development';
+}
 
-env = nconf.get('NODE_ENV') || 'development';
-filename = __dirname + '/' + env + '.json';
+filename = __dirname + '/' + env;
+config = require(filename);
+for (var i in argv) {
+  if (i !== '_' && i !== '$0' && argv.hasOwnProperty(i)) {
+    config[i] = argv[i];
+  }
+}
+config.env = env;
 
-nconf.file({
-  'file': filename
-});
-
-nconf.defaults({
-  'NODE_ENV': env,
-  'env': env
-});
-
-module.exports = nconf;
-
+module.exports = config;

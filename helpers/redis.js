@@ -1,7 +1,6 @@
 var redis = require('redis')
   , util = require('util')
-  , nconf = require('../config')
-  , config = nconf.get('YOUR-REPO-NAME')
+  , config = require('../config')
   , defaults = {
       port: 6379,
       host: "127.0.0.1",

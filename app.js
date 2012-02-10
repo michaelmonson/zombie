@@ -2,8 +2,7 @@ var everyauth = require('everyauth')
   , express = require('express')
   , mongooseAuth = require('mongoose-auth')
   , connectRedis = require('connect-redis')
-  , nconf = require('./config')
-  , config = nconf.get('YOUR-REPO-NAME')
+  , config = require('./config')
   , io = require('socket.io')
   , util = require('util')
   , model = require('./models')
@@ -31,7 +30,7 @@ app.use(express.cookieParser());
 
 // basic session for dev
 app.configure('development', function() {
-  app.use(express.session({secret : 'esoognom'}));
+  app.use(express.session({secret: config.sessionSecret}));
 });
 
 // testing and production should use
@@ -39,9 +38,7 @@ app.configure('development', function() {
 app.configure('test', 'production', function() {
   var RedisStore = connectRedis(express)
     , store = new RedisStore(config.redis);
-
-  app.use(express.cookieParser());
-  app.use(express.session({ secret: config.sessionSecret, store: store }));
+  app.use(express.session({secret: config.sessionSecret, store: store}));
 });
 
 // Config for every environment

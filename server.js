@@ -1,9 +1,9 @@
 var cluster = require('cluster')
   , os = require('os')
-  , nconf = require('./config')
+  , config = require('./config')
   , app;
 
-if (nconf.get('env') !== 'development' && cluster.isMaster) {
+if (config.env !== 'development' && cluster.isMaster) {
   // Fork workers.
   var numCPUs = os.cpus().length;
   console.log("Forking " + numCPUs + " workers.");

@@ -19,6 +19,7 @@
     "mongoose": "*",
     "mongoose-auth": "*",
     "natural": "*",
+    "optimist": "*",
     "redis": "*",
     "socket.io": "*",
     "supervisor": "*",

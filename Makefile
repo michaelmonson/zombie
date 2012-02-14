@@ -7,12 +7,16 @@ test: mocha
 
 mocha:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
-			$(TESTS)
+		--reporter spec \
+		--ui bdd \
+		$(TESTS)
 
 watch:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
-			--watch \
-			$(TESTS)
+		--reporter spec \
+		--ui bdd \
+		--watch \
+		$(TESTS)
 
 run:
 	./watch.sh

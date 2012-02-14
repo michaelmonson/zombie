@@ -36,16 +36,16 @@ Other important files that have conventional meaning
 
 ###Modules Used
 
-- [Express](http://expressjs.com/) - Web framework (includes [connect](http://senchalabs.github.com/connect/))
-- [Jade](http://jade-lang.com/) - Javascript based templating engine
-- [Mongoose](http://mongoosejs.com/) - Node.JS driver and wrapper for MongoDB
-- [MongooseAuth](https://github.com/bnoguchi/mongoose-auth) - MongoDB based authentication system, based on [everyauth](https://github.com/bnoguchi/everyauth)
+- [Express](http://expressjs.com/) - Web framework (includes [connect](http://senchalabs.github.com/connect/)).
+- [Jade](http://jade-lang.com/) - Javascript based templating engine.
+- [Mongoose](http://mongoosejs.com/) - Node.JS driver and wrapper for MongoDB.
+- [MongooseAuth](https://github.com/bnoguchi/mongoose-auth) - MongoDB based authentication system, based on [everyauth](https://github.com/bnoguchi/everyauth).
 - [Socket.IO](http://socket.io) - Real time web framework.  Websockets with fall back strategies.
-- [Backbone](http://documentcloud.github.com/backbone/) - Client side MVC framework
-- [nConf](https://github.com/flatiron/nconf) - Node configuration helper
-- [Mocha](http://visionmedia.github.com/mocha/) - Unit testing framework
-- [Should](https://github.com/visionmedia/should.js) - Helper module to BDD assertions
-- [Less](http://lesscss.org/) - Less css compiler
+- [Backbone](http://documentcloud.github.com/backbone/) - Client side MVC framework.
+- [Confrodo](https://github.com/ifit/confrodo) - Node configuration helper.
+- [Mocha](http://visionmedia.github.com/mocha/) - Unit testing framework.
+- [Should](https://github.com/visionmedia/should.js) - Helper module to BDD assertions.
+- [Less](http://lesscss.org/) - Less CSS compiler.
 
 ###Code format
 

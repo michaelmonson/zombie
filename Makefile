@@ -1,9 +1,28 @@
 TESTS = test/*.js
 SHELL := /bin/bash
+SERVERLOG = ./tmp/test.log
+SERVERPID = ./tmp/server.pid
 OS = $(shell uname)
 HASH = $(shell cat /dev/urandom | head -c 100 | shasum | awk '{print $$1}' | tr -d '\n')
 
-test: mocha
+main:
+	@echo "Available tasks:"
+	@echo "    run"
+	@echo "    test"
+	@echo "    mocha"
+	@echo "    mocha-watch"
+	@echo "    less"
+	@echo "    less-watch"
+	@echo "    update"
+	@echo "    install"
+	@echo "    git-init"
+	@echo "   *clean"
+	@echo "   *new-project"
+	@echo
+	@echo "* - will remove git repo"
+
+
+test: server-start mocha server-stop
 
 mocha:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
@@ -11,12 +30,30 @@ mocha:
 		--ui bdd \
 		$(TESTS)
 
-watch:
+mocha-watch:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
 		--reporter spec \
 		--ui bdd \
 		--watch \
 		$(TESTS)
+
+server-start:
+	@ echo ''
+	@ -mkdir -p `dirname $(SERVERLOG)` 2>&1
+	@ echo -n 'Starting Server... '
+	@(NODE_DISABLE_COLORS=1 NODE_ENV=test node ./server.js > $(SERVERLOG) 2>&1 & \
+		sleep 0.3 \
+		&& echo $$! > $(SERVERPID) \
+		&& echo 'DONE')
+	
+server-stop:
+	@ echo -n 'Shutting down Server... '
+	@ -kill -9 `cat $(SERVERPID)` > /dev/null 2>&1
+	@ echo 'DONE'
+	@ echo ''
+	@ -rm -f $(SERVERPID)
+	@ echo "Server log found in '$(SERVERLOG)'"
+	@ echo ''
 
 run:
 	./watch.sh

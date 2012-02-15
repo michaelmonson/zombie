@@ -84,5 +84,5 @@ io.sockets.on('connection', function(socket) {
   });
 });
 
-console.log('Listening on http://localhost:' + config.port);
-
+console.log('Listening on http://localhost:' + config.port +
+            ' in ' + config.env + ' mode.');

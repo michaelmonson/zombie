@@ -17,13 +17,15 @@
     "inflections": "*",
     "jade": "*",
     "less": "*",
+    "mhash": "*",
     "mongoose": "*",
     "mongoose-auth": "*",
     "natural": "*",
     "redis": "*",
     "socket.io": "*",
     "supervisor": "*",
-    "validator": "*"
+    "validator": "*",
+    "uglify-js": "*"
   },
   "devDependencies": {
     "vows": "*",

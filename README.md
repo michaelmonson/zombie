@@ -80,6 +80,12 @@ This will start the supervisor that will start the server.
 
 Go to http://localhost:3000 and login via facebook or local.  Once you are logged in you can send simple chat messages to yourself.
 
+###Building
+
+Before running the server in test or development mode, you need to run `make build` to compile javascript files.
+
+Instead of modifying `views/layout.jade` to add javascript file, edit `public/js/config.json`. This let's the build know about your scripts and the order they are needed.
+
 ###To update to the latest boilerplate
 
 When you want to bring your repo to the latest boilerplate code, run the following:
@@ -96,7 +102,7 @@ When you want to bring your repo to the latest boilerplate code, run the followi
 2. Adds .gitignore for the node_modules directory
 3. Includes 404 page and associated route
 4. Includes 500 page
-5. Loads external config vars using [nconf](https://github.com/flatiron/nconf) from env vars, shell vars, and config file vars
+5. Loads external config vars using [confrodo](https://github.com/ifit/confrodo) from env vars, shell vars, and config file vars
 6. Automatic route loading
 7. Authentication built in
 8. Ready for unit tests
@@ -104,5 +110,4 @@ When you want to bring your repo to the latest boilerplate code, run the followi
 ###ToDo's:
 
 - Documentation generator
-- Javascript Compiler
 - ...

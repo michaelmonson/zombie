@@ -1,6 +1,9 @@
 var config = require('../config')
+  , jsConfig = require('../public/js/config.json')
   , natural = require('natural')
   , fs = require('fs')
+  , env = require('confrodo').env
+  , version = require('../public/js/version').version
   , files = fs.readdirSync(__dirname);
 
 // Load each Controller module
@@ -20,11 +23,19 @@ var initController = function(app, name) {
       controller.init(app);
     }
   }
-}
+};
 
-// Dynamic Helpers
 var initHelpers = function(app) {
   new natural.NounInflector().attach();
+
+  // Static Helpers
+  app.helpers({
+    version: version,
+    env: env,
+    jsConfig: jsConfig
+  });
+
+  // Dynamic Helpers
   app.dynamicHelpers({
     googleAnalyticsId: function () {
       return config.googleAnalyticsId;

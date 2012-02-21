@@ -56,7 +56,12 @@ server-stop:
 	@ echo ''
 
 run:
-	./watch.sh
+	./bin/watch.sh
+
+build: less
+	rm -rf ./public/js/.build
+	mkdir ./public/js/.build
+	node ./bin/compile.js
 
 less-watch: less
 	@sleep 100000000
@@ -83,14 +88,13 @@ update: install
 install: ${OS}-install
 	touch README
 	npm install
-	npm install mongodb --mongodb:native
 
 Linux-install:
 	sed -i s/YOUR-REPO-NAME/`pwd | tr '/' '\n' \
-		| tail -1 | tr -d '\n'`/g `find . -type f | grep -v Makefile | grep -v .git`
+		| tail -1 | tr -d '\n'`/g `find . -type f | grep -v Makefile | grep -v .git | grep -v node_modules`
 	sed -i s/SESSION-SECRET/${HASH}/g `find ./config | grep json | grep -v .git`
 
 Darwin-install:
 	sed -i "" s/YOUR-REPO-NAME/`pwd | tr '/' '\n' \
-		| tail -1 | tr -d '\n'`/g `find . -type f | grep -v Makefile | grep -v .git`
+		| tail -1 | tr -d '\n'`/g `find . -type f | grep -v Makefile | grep -v .git | grep -v node_modules`
 	sed -i "" s/SESSION-SECRET/${HASH}/g `find ./config | grep json | grep -v .git`

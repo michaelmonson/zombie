@@ -1,6 +1,7 @@
 !!! 5
 html
   head
+    title ifit
     link(type='text/css',rel='stylesheet',href='/css/style.css')
   body
     script(src='http://static.ak.fbcdn.net/connect/en_US/core.js')
@@ -8,7 +9,29 @@ html
     script
       window.jQuery || document.write('<script src="/js/libs/jquery-1.7.1.min.js"><\\/script>')
     script(defer, src='/socket.io/socket.io.js')
-    script(defer, src='/js/script.js')
+    if (env == "development")
+      each type in jsConfig
+        each file in type
+          script(src='/js/' + file)
+    else
+      - src = '/js/.build/' + version + '/main.js'
+      script(src=src)
+      script
+        (function() {
+          var onload = function() {
+            var s = document.createElement('script');
+            s.src = '/js/.build/#{version}/onload.js';
+            head = document.getElementsByTagName('head')[0];
+            head.appendChild(s);
+          };
+          if (window.attachEvent) {
+            window.attachEvent('onload', onload);
+          } else if (window.addEventListener) {
+            window.addEventListener('load', onload, false);
+          } else {
+            document.addEventListener('load', onload, false);
+          }
+        })();
     .navbar.navbar-fixed-top
       .navbar-inner
         .container-fluid
@@ -49,4 +72,3 @@ html
         else
           .span12
             !=body
-    script(src='/js/lib/bootstrap.min.js')

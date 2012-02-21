@@ -12,13 +12,31 @@ var everyauth = require('everyauth')
 module.exports = app;
 
 app.configure('development', function() {
+  var re = /img|images/;
   app.use(function(req, res, next) {
-    if (req.url.match(/img|images/)) {
+    if (req.url.match(re)) {
       res.header("Cache-Control", "max-age=3600, must-revalidate");
     } else {
       res.header("Cache-Control", "no-cache");
       res.header("Pragma", "no-cache");
       res.header("Expires", "Thu, 19 Nov 1981 08:52:00 GMT");
+    }
+    next();
+  });
+});
+
+app.configure('test', 'production', function() {
+  var re = /build/
+    , date = new Date();
+
+  date.setDate(date.getDate() + 365*5);
+  date = date.toGMTString();
+
+  app.use(function(req, res, next) {
+    if (req.url.match(re)) {
+      res.header("Cache-Control", "public");
+      res.header("Vary", "Accept-Encoding");
+      res.header("Expires", date);
     }
     next();
   });

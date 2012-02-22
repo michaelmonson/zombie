@@ -2,7 +2,6 @@ var fs = require('fs')
   , jsp = require("uglify-js").parser
   , pro = require("uglify-js").uglify
   , crypto = require("crypto")
-  , hash = require("mhash").hash
   , jsConfig = require("../public/js/config.json")
   , prefix = fs.realpathSync(__dirname + "/../public/js") + "/"
   , buff = new Buffer(9)

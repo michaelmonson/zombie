@@ -15,5 +15,8 @@
     "appId": "196550814144",
     "appSecret": "56ca861ab016bfd779d83d3660d74a48"
   },
+  "workers": {
+    "app": "cpus/2" 
+  },
   "googleAnalyticsId": "123456789"
 }

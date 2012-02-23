@@ -25,7 +25,8 @@
     "socket.io": "*",
     "supervisor": "*",
     "validator": "*",
-    "uglify-js": "*"
+    "uglify-js": "*",
+    "ifit-auth": "git+ssh://git@github.com:ifit/auth-client.git"
   },
   "devDependencies": {
     "vows": "*",

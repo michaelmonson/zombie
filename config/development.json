@@ -1,15 +1,22 @@
 {
   "port": "3000",
-  "sessionSecret": "SESSION-SECRET",
+  "sessionName": "ifit.sid",
+  "sessionSecret": "2LxCK9088NeMGUo04ZsryY4VfiZ1j57S",
+  "cookieDomain": ".ifit-dev.com",
   "mongodb": {
     "host": "127.0.0.1",
     "database": "YOUR-REPO-NAME_dev",
     "port": 27017
   },
   "redis": {
-    "host": "127.0.0.1",
+    "host": "redis.db.ifit-dev.com",
     "port": 6379,
     "options" : {}
+  },
+  "ifitAuth": {
+	"authUri": "https://auth.ifit-dev.com",
+	"ignoreRoutes": ["/"],
+	"successLoginRedirect": "/secret"
   },
   "facebook": {
     "appId": "196550814144",

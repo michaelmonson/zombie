@@ -1,14 +1,1 @@
-- if (!everyauth.loggedIn)
-  h2 Not Logged In
-- else
-  h2 Authenticated
-  #user-id Logged in with 
-    code `user.id` #{user.id} 
-    span aka 
-    code `everyauth.user.id` #{everyauth.user.id}
-  - if (everyauth.hasOwnProperty("facebook"))
-    h3 Facebook User Data
-    pre= JSON.stringify(everyauth.facebook.user)
-  - else if (everyauth.hasOwnProperty("user"))
-    h3 Everyauth Data
-    pre= JSON.stringify(everyauth.user)
+h2 Welcome

@@ -49,10 +49,6 @@ html
                 else
                   li
                     a(href=path)!=name
-            - if (everyauth.facebook)
-              p.navbar-text.pull-right Logged in as #{everyauth.facebook.user.username}
-            - else if (everyauth.user && everyauth.user.name)
-              p.navbar-text.pull-right Logged in as #{everyauth.user.name.first} #{everyauth.user.name.last}
               
     #main.container-fluid
       .row-fluid

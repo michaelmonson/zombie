@@ -1,6 +1,8 @@
 {
   "port": "80",
+  "sessionName": "ifit.sid",
   "sessionSecret": "SESSION-SECRET",
+  "cookieDomain": ".ifit.com",
   "mongodb": {
     "username": "",
     "password": "",
@@ -9,9 +11,14 @@
     "port": 27017
   },
   "redis": {
-    "host": "127.0.0.1",
+    "host": "redis.db.internal.ifit.com",
     "port": 6379,
     "options" : {}
+  },
+  "ifitAuth": {
+	"authUri": "https://auth.ifit.com",
+	"ignoreRoutes": ["/"],
+	"successLoginRedirect": "/secret"
   },
   "facebook": {
     "appId": "196550814144",

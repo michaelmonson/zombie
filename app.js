@@ -1,6 +1,5 @@
-var everyauth = require('everyauth')
+var ifitAuth = require('ifit-auth')
   , express = require('express')
-  , mongooseAuth = require('mongoose-auth')
   , connectRedis = require('connect-redis')
   , config = require('./config')
   , io = require('socket.io')
@@ -46,32 +45,40 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.bodyParser());
 app.use(express.cookieParser());
 
-// basic session for dev
-app.configure('development', function() {
-  app.use(express.session({secret: config.sessionSecret}));
-});
+var RedisStore = connectRedis(express);
+var sessOptions = {
+  key: config.sessionName,
+  secret: config.sessionSecret,
+  store: new RedisStore(config.redis),
+  cookie: {domain: config.cookieDomain},
+  secure: true
+};
 
-// testing and production should use
-// redis for the session store
-app.configure('test', 'production', function() {
-  var RedisStore = connectRedis(express)
-    , store = new RedisStore(config.redis);
-  app.use(express.session({secret: config.sessionSecret, store: store}));
-});
+/*
+// dev settings
+app.configure('development', function() {});
+
+// test settings
+app.configure('test', function() {});
+
+// prod settings
+app.configure('production', function() {});
+*/
 
 // Config for every environment
 app.configure(function() {
+  app.use(express.session(sessOptions));
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
-  mongooseAuth.helpExpress(app);
+  ifitAuth.helpExpress(app);
 });
 
-// login and registration magic
-app.use(mongooseAuth.middleware());
+// login magic
+config.ifitAuth['protocol'] = config.protocol;
+app.use(ifitAuth.middleware(config.ifitAuth));
 
 // Config for dev and test environments
 app.configure('development', 'test', function() {
-  everyauth.debug = true;
   app.use(express.errorHandler({
     dumpExceptions : true,
     showStack : true

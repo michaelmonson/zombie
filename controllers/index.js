@@ -4,6 +4,7 @@ var config = require('../config')
   , fs = require('fs')
   , env = require('confrodo').env
   , version = require('../public/js/version').version
+  , menu = require('../helpers/menu')
   , files = fs.readdirSync(__dirname);
 
 // Load each Controller module
@@ -44,23 +45,22 @@ var initHelpers = function(app) {
       return req.url;
     },
     menu: function(req, res) {
-      var menu;
       if (res.hasOwnProperty('menu')) {
-         menu = res.menu;
+        _menu = res.menu;
       } else if (req.hasOwnProperty('user')) {
-        menu = {
-          "/": "Home",
-          "/logout": "Logout"
-        };
+        menu.flush();
+        menu.add("/", "Home");
+        menu.add("/logout", "Logout");
+        _menu = menu.getItems();
       } else {
-        menu = {
-          "/": "Home",
-          "/register": "Register",
-          "/login": "Login",
-          "/auth/facebook": "<img src=\"/img/facebook-connect-button.png\" />"
-        };
+        menu.flush();
+        menu.add("/", "Home");
+        menu.add(config.ifitAuth.uri + "/register", "Register");
+        menu.add("/login", "Login");
+        //menu.add("/auth/facebook", "<img src=\"/img/facebook-connect-button.png\" />");
+        _menu = menu.getItems();
       }
-      return menu;
+      return _menu;
     }
   });
 

@@ -10,7 +10,6 @@
     "confrodo": ">= 0.0.4",
     "connect": "*",
     "connect-redis": "*",
-    "everyauth": "*",
     "express": "*",
     "express-mongoose": "*",
     "hiredis": "*",
@@ -18,19 +17,16 @@
     "jade": "*",
     "less": "*",
     "mongoose": "*",
-    "mongoose-auth": "*",
     "natural": "*",
     "redis": "*",
     "socket.io": "*",
     "supervisor": "*",
     "validator": "*",
-    "uglify-js": "*"
+    "uglify-js": "*",
+    "ifit-auth": "git+ssh://git@github.com:ifit/auth-client.git"
   },
   "devDependencies": {
-    "vows": "*",
     "mocha": "*",
-    "cucumis": "*",
-    "zombie": "*",
     "should": "*"
   },
   "engine": "node >= 0.6.6"

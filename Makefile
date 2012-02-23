@@ -85,8 +85,10 @@ git-init:
 
 update: install
 
-install: ${OS}-install
+install: ${OS}-install npm-install build
 	touch README
+
+npm-install:
 	npm install
 
 Linux-install:

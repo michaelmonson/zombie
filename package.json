@@ -7,7 +7,7 @@
   "main": "index.js",
   "dependencies": {
     "backbone": "*",
-    "confrodo": "*",
+    "confrodo": ">= 0.0.4",
     "connect": "*",
     "connect-redis": "*",
     "everyauth": "*",
@@ -17,7 +17,6 @@
     "inflections": "*",
     "jade": "*",
     "less": "*",
-    "mhash": "*",
     "mongoose": "*",
     "mongoose-auth": "*",
     "natural": "*",

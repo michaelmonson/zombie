@@ -1,6 +1,5 @@
 var ifitAuth = require('ifit-auth')
   , express = require('express')
-  , mongooseAuth = require('mongoose-auth')
   , connectRedis = require('connect-redis')
   , config = require('./config')
   , io = require('socket.io')

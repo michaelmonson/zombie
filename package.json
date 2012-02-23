@@ -26,10 +26,7 @@
     "ifit-auth": "git+ssh://git@github.com:ifit/auth-client.git"
   },
   "devDependencies": {
-    "vows": "*",
     "mocha": "*",
-    "cucumis": "*",
-    "zombie": "*",
     "should": "*"
   },
   "engine": "node >= 0.6.6"

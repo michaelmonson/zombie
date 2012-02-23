@@ -16,9 +16,10 @@
     "options" : {}
   },
   "ifitAuth": {
-	"authUri": "https://auth.ifit.com",
-	"ignoreRoutes": ["/"],
-	"successLoginRedirect": "/secret"
+    "uri": "https://auth.ifit-dev.com",
+    "callbackUri": "http://local.ifit-dev.com:3000",
+    "ignoreRoutes": ["/"],
+    "successLoginRedirect": "/secret"
   },
   "facebook": {
     "appId": "196550814144",

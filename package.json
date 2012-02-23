@@ -23,7 +23,7 @@
     "supervisor": "*",
     "validator": "*",
     "uglify-js": "*",
-    "ifit-auth": "git+ssh://git@github.com:ifit/auth-client.git"
+    "ifit-auth": "git+ssh://git@github.com:ifit/auth-client.git#master"
   },
   "devDependencies": {
     "mocha": "*",

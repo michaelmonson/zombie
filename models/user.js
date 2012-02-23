@@ -15,8 +15,7 @@ var UserSchema = new mongoose.Schema({
 
 UserSchema.index({ 'ifit.id': 1 }, { unique: true });
 
-// Register the model into mogoose, and pass that as the exports
-module.exports = User = UserSchema;
+module.exports = User = require('../models').db.model('User', UserSchema);
 
 module.exports.findOrCreateUser = ifitAuth.findUserById = function (userId, callback) {
   User.findOne({'ifit.id': userId}, function(err, doc) {

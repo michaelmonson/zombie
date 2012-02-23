@@ -4,7 +4,7 @@
   "sessionSecret": "2LxCK9088NeMGUo04ZsryY4VfiZ1j57S",
   "cookieDomain": ".ifit-dev.com",
   "mongodb": {
-    "host": "127.0.0.1",
+    "host": "mongo.db.ifit-dev.com",
     "database": "YOUR-REPO-NAME",
     "port": 27017
   },
@@ -14,9 +14,10 @@
     "options" : {}
   },
   "ifitAuth": {
-	"authUri": "https://auth.ifit-dev.com",
-	"ignoreRoutes": ["/"],
-	"successLoginRedirect": "/secret"
+    "uri": "https://auth.ifit-dev.com",
+    "callbackUri": "http://local.ifit-dev.com:3000",
+    "ignoreRoutes": ["/"],
+    "successLoginRedirect": "/secret"
   },
   "facebook": {
     "appId": "196550814144",

@@ -56,8 +56,7 @@ var initHelpers = function(app) {
         menu.flush();
         menu.add("/", "Home");
         menu.add(config.ifitAuth.uri + "/register", "Register");
-        menu.add("/login", "Login");
-        //menu.add("/auth/facebook", "<img src=\"/img/facebook-connect-button.png\" />");
+        menu.add(config.ifitAuth.uri + "/login?next=" + config.ifitAuth.callbackUri, "Login");
         _menu = menu.getItems();
       }
       return _menu;

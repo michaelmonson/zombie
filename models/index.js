@@ -9,8 +9,6 @@ var mongoose = require('mongoose')
   , db;
 
 defaults = {
-  username: '',
-  password: '',
   host: 'localhost',
   database: 'YOUR-REPO-NAME',
   port: 27017
@@ -20,8 +18,7 @@ defaults = {
 mongoConfig = config.mongodb || defaults;
 
 // Check if there is a username and password 
-if((mongoConfig.username) && mongoConfig.username != '' 
-  && (mongoConfig.password) && mongoConfig.password != '') {
+if(mongoConfig.username && mongoConfig.password) {
   mongoUri += mongoConfig.username  
     + ':' + mongoConfig.password + '@';
 }
@@ -34,7 +31,7 @@ mongoUri += mongoConfig.host
 
 // Create an individual connection to the database.  You MUST use
 // createConnection, as connect() is shared globally.
-db = mongoose.createConnection(mongoUri, function(err) {
+exports.db = db = mongoose.createConnection(mongoUri, function(err) {
   if(err) {
     console.log('connection error: ' + require('util').inspect(err));
   }
@@ -60,8 +57,6 @@ files.forEach(function(file) {
     module.exports[name] = model; 
   }
 });
-
-exports.db = db;
 
 exports.disconnect = function disconnect(callback){
   var callback = callback || function() {};

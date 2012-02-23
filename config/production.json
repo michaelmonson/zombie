@@ -2,8 +2,10 @@
   "port": "80",
   "sessionSecret": "SESSION-SECRET",
   "mongodb": {
-    "host": "127.0.0.1",
-    "database": "YOUR-REPO-NAME_prod",
+    "username": "",
+    "password": "",
+    "host": "mongo.db.ifit-beta.com",
+    "database": "YOUR-REPO-NAME",
     "port": 27017
   },
   "redis": {

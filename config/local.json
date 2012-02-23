@@ -3,7 +3,7 @@
   "sessionSecret": "SESSION-SECRET",
   "mongodb": {
     "host": "127.0.0.1",
-    "database": "YOUR-REPO-NAME_local",
+    "database": "YOUR-REPO-NAME",
     "port": 27017
   },
   "redis": {

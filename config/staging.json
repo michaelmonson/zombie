@@ -1,13 +1,15 @@
 {
-  "port": "3000",
+  "port": "80",
   "sessionSecret": "SESSION-SECRET",
   "mongodb": {
-    "host": "mongo.db.ifit-dev.com",
+    "username": "",
+    "password": "",
+    "host": "mongo.db.ifit-staging.com",
     "database": "YOUR-REPO-NAME",
     "port": 27017
   },
   "redis": {
-    "host": "localhost",
+    "host": "127.0.0.1",
     "port": 6379,
     "options" : {}
   },
@@ -16,7 +18,7 @@
     "appSecret": "56ca861ab016bfd779d83d3660d74a48"
   },
   "workers": {
-    "app": "1"
+    "app": "cpus"
   },
   "googleAnalyticsId": "123456789"
 }

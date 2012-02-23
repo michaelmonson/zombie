@@ -45,4 +45,4 @@ UserSchema.plugin(mongooseAuth, {
 });
 
 // Register the model into mogoose, and pass that as the exports
-module.exports = User = mongoose.model('User', UserSchema);
+module.exports = User = UserSchema;

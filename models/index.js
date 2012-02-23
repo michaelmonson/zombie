@@ -5,19 +5,45 @@ var mongoose = require('mongoose')
   , files = fs.readdirSync(__dirname)
   , defaults
   , mongoConfig
+  , mongoUri = 'mongodb://'
   , db;
 
 defaults = {
+  username: '',
+  password: '',
   host: 'localhost',
   database: 'YOUR-REPO-NAME',
   port: 27017
 };
 
-mongoConfig = config.mongodb || defaults
+// Get the mongo config from the config file where possible
+mongoConfig = config.mongodb || defaults;
 
-db = mongoose.connect(mongoConfig.host,
-                      mongoConfig.database,
-                      mongoConfig.port);
+// Check if there is a username and password 
+if((mongoConfig.username) && mongoConfig.username != '' 
+  && (mongoConfig.password) && mongoConfig.password != '') {
+  mongoUri += mongoConfig.username  
+    + ':' + mongoConfig.password + '@';
+}
+
+// Create the mongo Uri to connect to
+mongoUri += mongoConfig.host 
+  + ':' + mongoConfig.port 
+   + '/' + mongoConfig.database;
+
+
+// Create an individual connection to the database.  You MUST use
+// createConnection, as connect() is shared globally.
+db = mongoose.createConnection(mongoUri, function(err) {
+  if(err) {
+    console.log('connection error: ' + require('util').inspect(err));
+  }
+});
+
+// Event when the db is connected 
+db.once('open', function ()  {
+  console.log('opened connection to mongo db: ' + mongoUri);
+});
 
 // Load each Model module
 files.forEach(function(file) {
@@ -29,7 +55,7 @@ files.forEach(function(file) {
     name = match[1].camelize().toString();
     model = require('./' + file);
     if (model instanceof mongoose.Schema) {
-      model = mongoose.model(name, model);
+      model = db.model(name, model);
     }
     module.exports[name] = model; 
   }
@@ -39,11 +65,11 @@ exports.db = db;
 
 exports.disconnect = function disconnect(callback){
   var callback = callback || function() {};
-  mongoose.connection.close(callback);
+  db.close(callback);
 };
 
 exports.drop = function drop(callback){
   var callback = callback || function() {};
-  mongoose.connection.db.executeDbCommand( {dropDatabase:1}, callback);
+  db.executeDbCommand( {dropDatabase:1}, callback);
 };
 

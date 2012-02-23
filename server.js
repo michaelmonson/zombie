@@ -37,7 +37,6 @@ var spawnWorker = function(app, autoRestart) {
       console.log("Starting another " + app + " worker.");
       spawnWorker(app, autoRestart);
     });
-  } else {
   }
 };
 

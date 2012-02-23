@@ -4,6 +4,8 @@ var cluster = require('cluster')
   , cpus = os.cpus().length
   , startup
   , count
+  , autoRestart
+  , undeadCount = 0
   , app;
 
 var spawnWorker = function(app, autoRestart) {
@@ -12,12 +14,30 @@ var spawnWorker = function(app, autoRestart) {
   var worker = cluster.fork();
   // tell the worker what to do
   worker.send(app);
+  console.log("worker started with pid " + worker.pid);
+  ++undeadCount;
+  worker.on('exit', function(code, signal) {
+    if (signal) {
+      console.log(app + " worker " + worker.pid + " died with signal " + signal + ".");
+    } else if (code) {
+      console.log(app + " worker " + worker.pid + " died with code " + code + ".");
+    } else {
+      console.log(app + " worker " + worker.pid + " died.");
+    }
+    --undeadCount;
+    if (undeadCount == 0) {
+      console.log("No workers remaining, commiting suicide.");
+      process.exit();
+    }
+  });
   if (autoRestart) {
+    undeadCount = Infinity;
     // auto restart workers on death
     worker.on('exit', function(code, signal) {
-      console.log(app + " worker " + worker.pid + " died, starting another.");
+      console.log("Starting another " + app + " worker.");
       spawnWorker(app, autoRestart);
     });
+  } else {
   }
 };
 
@@ -26,11 +46,17 @@ if (cluster.isMaster) {
   for (var app in config.workers) {
     if (config.workers.hasOwnProperty(app)) {
       // get the number of workers to spwan
-      eval("count = " + config.workers[app]);
+      if (typeof config.workers[app] === "object") {
+        eval("count = " + config.workers[app]["count"]);
+        autoRestart = config.workers[app]["autoRestart"];
+      } else {
+        eval("count = " + config.workers[app]);
+        autoRestart = true;
+      }
       console.log("Spawning " + count + " " + app + " workers.");
       // launch them
       for (var i = 0; i < count; i++) {
-        spawnWorker(app);
+        spawnWorker(app, autoRestart);
       }
     }
   }

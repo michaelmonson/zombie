@@ -3,7 +3,7 @@
   "sessionSecret": "SESSION-SECRET",
   "mongodb": {
     "host": "127.0.0.1",
-    "database": "YOUR-REPO-NAME_dev",
+    "database": "YOUR-REPO-NAME_local",
     "port": 27017
   },
   "redis": {
@@ -16,7 +16,10 @@
     "appSecret": "56ca861ab016bfd779d83d3660d74a48"
   },
   "workers": {
-    "app": "cpus"
+    "app": {
+      "count": 1,
+      "autoRestart": false
+    }
   },
   "googleAnalyticsId": "123456789"
 }

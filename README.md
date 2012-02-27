@@ -90,7 +90,7 @@ Instead of modifying `views/layout.jade` to add javascript file, edit `public/js
 
 When you want to bring your repo to the latest boilerplate code, run the following:
 
-    git fetch git://github.com/ifit/node-boilerplate.git master:node-boilerplate-updates
+    git fetch git@github.com:ifit/node-boilerplate.git master:node-boilerplate-updates
     git checkout <your-working-repo>
     git merge node-boilerplate-updates
     # merge any conflicts

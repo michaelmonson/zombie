@@ -121,6 +121,7 @@ var methods = [
   "msetnx",
   "multi",
   "object",
+  "on",
   "persist",
   "ping",
   "psubscribe",

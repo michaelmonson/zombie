@@ -18,6 +18,7 @@
     "less": "*",
     "mongoose": "*",
     "natural": "*",
+    "optimus": "*",
     "redis": "*",
     "socket.io": "*",
     "supervisor": "*",

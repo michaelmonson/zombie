@@ -70,12 +70,12 @@ app.configure(function() {
   app.use(express.session(sessOptions));
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
-  ifitAuth.helpExpress(app);
+  //ifitAuth.helpExpress(app);
 });
 
 // login magic
 config.ifitAuth['protocol'] = config.protocol;
-app.use(ifitAuth.middleware(config.ifitAuth));
+//app.use(ifitAuth.middleware(config.ifitAuth));
 
 // Config for dev and test environments
 app.configure('development', 'test', function() {

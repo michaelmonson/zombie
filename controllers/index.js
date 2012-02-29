@@ -46,7 +46,7 @@ var initHelpers = function(app) {
     },
     menu: function(req, res) {
       if (res.hasOwnProperty('menu')) {
-        _menu = res.menu;
+        var _menu = res.menu;
       } else if (req.hasOwnProperty('user')) {
         menu.flush();
         menu.add("/", "Home");

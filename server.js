@@ -1,4 +1,4 @@
-var optimus = require('./optimus')
+var optimus = require('optimus')
   , config = require('./config');
 
 optimus.start(config.workers, __dirname);

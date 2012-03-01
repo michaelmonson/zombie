@@ -9,7 +9,7 @@ html
     script
       window.jQuery || document.write('<script src="/js/libs/jquery-1.7.1.min.js"><\\/script>')
     script(defer, src='/socket.io/socket.io.js')
-    if (env == "development")
+    if (env == "local")
       each type in jsConfig
         each file in type
           script(src='/js/' + file)

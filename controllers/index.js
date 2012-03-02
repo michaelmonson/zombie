@@ -47,7 +47,7 @@ var initHelpers = function(app) {
     menu: function(req, res) {
       if (res.hasOwnProperty('menu')) {
         var _menu = res.menu;
-      } else if (req.hasOwnProperty('user')) {
+      } else if (req.session.auth && req.session.auth.loggedIn) {
         menu.flush();
         menu.add("/", "Home");
         menu.add("/logout", "Logout");

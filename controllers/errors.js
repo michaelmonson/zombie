@@ -11,7 +11,8 @@ NotFound.prototype.__proto__ = Error.prototype;
 var renderError = function(err, req, res, next) {
   var defaultError = "An error occured."
     , format;
-  if (err instanceof NotFound) {
+  if (err instanceof NotFound
+    || err.message.toLowerCase().trim() == 'not found') {
     res.render('errors/404', {
       locals: {
         title: '404 - Not Found',

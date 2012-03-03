@@ -70,9 +70,11 @@ exports.init = function(app) {
   Object.keys(exports).map(function(name){
     if (name === 'init') { return; } // not interested in ourselves
     if (name === 'root') { return; } // root goes last
+    if (name === 'errors') { return; } // errors goes last
     initController(app, name);
   });
   initController(app, 'root'); // root goes last
+  initController(app, 'errors'); // errors goes last
   initHelpers(app);
 };
 

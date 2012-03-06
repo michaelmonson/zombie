@@ -1,8 +1,0 @@
-{
-  "main": [
-    "lib/bootstrap.min.js"
-  ],
-  "onload": [
-    "script.js"
-  ]
-}

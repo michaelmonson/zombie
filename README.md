@@ -1,10 +1,10 @@
-Node Boilerplate 
+Node Boilerplate
 =================
 
 Heavily modified version of [this](https://github.com/robrighter/node-boilerplate)
 
 *Requires Node v0.6.6 (or newer)*
-node-boilerplate takes html-boilerplate, express, connect, jade, mongoose, mongoose-auth, and Socket.IO and organizes them into a ready to use website project. Its a fast way to get working on your Node website without having to worry about the setup. It takes care of all the boring parts, like setting up your views, 404 page, 500 page, getting the modules organized, etc... 
+node-boilerplate takes express, connect, jade, mongoose, mongoose-auth, and Socket.IO and organizes them into a ready to use website project. Its a fast way to get working on your Node website without having to worry about the setup. It takes care of all the boring parts, like setting up your views, 404 page, 500 page, getting the modules organized, etc...
 
 ###Node Boilerplate has these goals:
 
@@ -14,7 +14,7 @@ node-boilerplate takes html-boilerplate, express, connect, jade, mongoose, mongo
 
 ###Project Organization
 
-The project is organized into a traditional mvc pattern.  
+The project is organized into a traditional mvc pattern.
 
 - Models are in the `./models` directory.  By adding a reference in model.js to a new model, that model is initialized at boot.  Another advantage of this is that by including a single model instance, all models are available via something like `model.User`
 - Views are in the `./views` directory and should be organized into directories and files that match their route files.
@@ -49,24 +49,13 @@ Other important files that have conventional meaning
 
 ###Code format
 
-Formatting code is good practice.  In large development teams, have well formatted code makes working together easier.  This section is very open to contribution, and most of the code standard should be very visible though the boilerplate code.  These conventions are chosen to match the language, and the node.js community convention.
-
-Use spaces and not tabs.  This is an easy change in the settings of Aptana to replace tabs with spaces (2).
-
-Declare new variables with commas on the same line. This goes against most node.js convention, but adheres to standard javascript convention.  This is important to have the comma on the same line for older browser compatibility if we are repurposing any code to the client.  For example:
-
-    var util = require('util'),
-      express = require('express');
-
-Curly braces should be inline, eq `exports.myFunc = new function() {`. They should not be declared on a separate line.
-	
-In general, everything should conform to JSLint tests where possible.
+See the github [wiki page](https://github.com/ifit/node-boilerplate/wiki/Coding-Standards).
 
 ###To start a boilerplate project:
     
     git clone git@github.com:ifit/node-boilerplate.git mynewproject
     cd mynewproject
-    make new-project
+    make new-project  # this deletes the git repo
     
 This will copy all of the required project files, and remove the reference to this git repo so you can start your own, and install the required packages
 
@@ -84,7 +73,7 @@ Go to http://localhost:3000 and login via facebook or local.  Once you are logge
 
 Before running the server in test or development mode, you need to run `make build` to compile javascript files.
 
-Instead of modifying `views/layout.jade` to add javascript file, edit `public/js/config.json`. This let's the build know about your scripts and the order they are needed.
+Instead of modifying `views/layout.jade` to add javascript file, edit `config/common.json` in the `javascript` section. This let's the build know about your scripts and the order they are needed.
 
 ###To update to the latest boilerplate
 
@@ -109,5 +98,4 @@ When you want to bring your repo to the latest boilerplate code, run the followi
 
 ###ToDo's:
 
-- Documentation generator
-- ...
+- Nothing at the moment.

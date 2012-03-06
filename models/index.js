@@ -1,3 +1,5 @@
+"use strict";
+
 var mongoose = require('mongoose')
   , inflections = require('inflections')
   , config = require('../config')
@@ -31,7 +33,7 @@ mongoUri += mongoConfig.host
 
 // Create an individual connection to the database.  You MUST use
 // createConnection, as connect() is shared globally.
-exports.db = db = mongoose.createConnection(mongoUri, function(err) {
+db = mongoose.createConnection(mongoUri, function(err) {
   if(err) {
     console.log('connection error: ' + require('util').inspect(err));
   }
@@ -57,14 +59,4 @@ files.forEach(function(file) {
     module.exports[name] = model; 
   }
 });
-
-exports.disconnect = function disconnect(callback){
-  var callback = callback || function() {};
-  db.close(callback);
-};
-
-exports.drop = function drop(callback){
-  var callback = callback || function() {};
-  db.executeDbCommand( {dropDatabase:1}, callback);
-};
 

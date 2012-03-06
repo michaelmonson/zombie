@@ -1,10 +1,12 @@
+"use strict";
+
 var config = require('../config')
-  , jsConfig = require('../public/js/config.json')
+  , jsConfig = require('../config').javascript
   , natural = require('natural')
   , fs = require('fs')
   , env = require('confrodo').env
   , version = require('../public/js/version').version
-  , menu = require('../helpers/menu')
+  , menu = require('../lib/menu')
   , files = fs.readdirSync(__dirname);
 
 // Load each Controller module
@@ -49,14 +51,14 @@ var initHelpers = function(app) {
         var _menu = res.menu;
       } else if (req.hasOwnProperty('user')) {
         menu.flush();
-        menu.add("/", "Home");
-        menu.add("/logout", "Logout");
+        menu.add('/', 'Home');
+        menu.add('/logout', 'Logout');
         _menu = menu.getItems();
       } else {
         menu.flush();
-        menu.add("/", "Home");
-        menu.add(config.ifitAuth.uri + "/register", "Register");
-        menu.add(config.ifitAuth.uri + "/login?next=" + config.ifitAuth.callbackUri, "Login");
+        menu.add('/', 'Home');
+        menu.add(config.ifitAuth.uri + '/register', 'Register');
+        menu.add(config.ifitAuth.uri + '/login?next=' + config.ifitAuth.callbackUri, 'Login');
         _menu = menu.getItems();
       }
       return _menu;

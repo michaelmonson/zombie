@@ -1,3 +1,4 @@
+"use strict";
 
 // Not Found Error Type
 function NotFound(msg) {
@@ -6,10 +7,10 @@ function NotFound(msg) {
   Error.captureStackTrace(this, arguments.callee);
 };
 
-NotFound.prototype.__proto__ = Error.prototype;
+NotFound.prototype = new Error();
 
 var renderError = function(err, req, res, next) {
-  var defaultError = "An error occured."
+  var defaultError = 'An error occured.'
     , format;
   if (err instanceof NotFound) {
     res.render('errors/404', {
@@ -20,18 +21,18 @@ var renderError = function(err, req, res, next) {
       status: 404
     });
   } else {
-    if (typeof err == "object") {
-       if (err.hasOwnProperty("message")) {
+    if (typeof err == 'object') {
+       if (err.hasOwnProperty('message')) {
           message = err.message;
        } else {
           message = defaultError;
        }
-       if (err.hasOwnProperty("log")) {
+       if (err.hasOwnProperty('log')) {
           log = err.log;
        } else {
           log = message;
        }
-    } else if (typeof err == "string") {
+    } else if (typeof err == 'string') {
        message = err;
        log = err;
     } else {
@@ -39,10 +40,10 @@ var renderError = function(err, req, res, next) {
        log = defaultError;
     }
     if (err instanceof Error) {
-      log += "\n" + err.stack;
+      log += '\n' + err.stack;
     }
-    format = res.hasOwnProperty("format") ? res.format : "html";
-    if (format == "json") {
+    format = res.hasOwnProperty('format') ? res.format : 'html';
+    if (format == 'json') {
       res.json({error: message});
     } else {
       res.render('errors/500', {
@@ -53,7 +54,7 @@ var renderError = function(err, req, res, next) {
         status: 500
       });
     }
-    console.log("ERROR: " + log);
+    console.log('ERROR: ' + log);
   }
 };
 

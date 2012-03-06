@@ -1,3 +1,5 @@
+"use strict";
+
 var ifitAuth = require('ifit-auth')
   , express = require('express')
   , connectRedis = require('connect-redis')
@@ -14,11 +16,11 @@ app.configure('development', function() {
   var re = /img|images/;
   app.use(function(req, res, next) {
     if (req.url.match(re)) {
-      res.header("Cache-Control", "max-age=3600, must-revalidate");
+      res.header('Cache-Control', 'max-age=3600, must-revalidate');
     } else {
-      res.header("Cache-Control", "no-cache");
-      res.header("Pragma", "no-cache");
-      res.header("Expires", "Thu, 19 Nov 1981 08:52:00 GMT");
+      res.header('Cache-Control', 'no-cache');
+      res.header('Pragma', 'no-cache');
+      res.header('Expires', 'Thu, 19 Nov 1981 08:52:00 GMT');
     }
     next();
   });
@@ -33,15 +35,15 @@ app.configure('test', 'production', function() {
 
   app.use(function(req, res, next) {
     if (req.url.match(re)) {
-      res.header("Cache-Control", "public");
-      res.header("Vary", "Accept-Encoding");
-      res.header("Expires", date);
+      res.header('Cache-Control', 'public');
+      res.header('Vary', 'Accept-Encoding');
+      res.header('Expires', date);
     }
     next();
   });
 });
 
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + '/public'));
 app.use(express.bodyParser());
 app.use(express.cookieParser());
 
@@ -54,16 +56,17 @@ var sessOptions = {
   secure: true
 };
 
-/*
 // dev settings
-app.configure('development', function() {});
+app.configure('development', function() {
+});
 
 // test settings
-app.configure('test', function() {});
+app.configure('test', function() {
+});
 
 // prod settings
-app.configure('production', function() {});
-*/
+app.configure('production', function() {
+});
 
 // Config for every environment
 app.configure(function() {

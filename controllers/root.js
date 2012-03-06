@@ -1,5 +1,6 @@
+"use strict";
+
 var ifitAuth = require('ifit-auth');
-var util = require('util');
 
 // Init the base routes of the application
 var home = function (req, res) {

@@ -1,0 +1,18 @@
+{
+  "sessionName": "ifit.sid",
+  "sessionSecret": "SESSION-SECRET",
+  "cookieDomain": ".ifit-dev.com",
+  "facebook": {
+    "appId": "196550814144",
+    "appSecret": "56ca861ab016bfd779d83d3660d74a48"
+  },
+  "javascript": {
+    "main": [
+      "lib/bootstrap.min.js"
+    ],
+    "onload": [
+      "script.js"
+    ]
+  },
+  "googleAnalyticsId": "123456789"
+}

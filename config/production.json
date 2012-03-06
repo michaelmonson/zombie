@@ -1,8 +1,5 @@
 {
   "port": "80",
-  "sessionName": "ifit.sid",
-  "sessionSecret": "SESSION-SECRET",
-  "cookieDomain": ".ifit.com",
   "mongodb": {
     "username": "",
     "password": "",
@@ -18,15 +15,9 @@
   "ifitAuth": {
     "uri": "https://auth.ifit-dev.com",
     "callbackUri": "http://local.ifit-dev.com:3000",
-    "ignoreRoutes": ["/"],
     "successLoginRedirect": "/secret"
-  },
-  "facebook": {
-    "appId": "196550814144",
-    "appSecret": "56ca861ab016bfd779d83d3660d74a48"
   },
   "workers": {
     "app": "cpus"
-  },
-  "googleAnalyticsId": "123456789"
+  }
 }

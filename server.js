@@ -1,3 +1,5 @@
+"use strict";
+
 var optimus = require('optimus')
   , config = require('./config');
 

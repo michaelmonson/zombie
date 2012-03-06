@@ -58,7 +58,19 @@ server-stop:
 run:
 	./bin/watch.sh
 
-build: less
+docs:
+	@rm -rf docs
+	@./node_modules/.bin/docco-husky \
+		-name "`pwd | tr '/' '\n' | tail -1 | tr -d '\n' | tr '-' ' '`" \
+		index.js \
+		lib/*.js \
+		models/*.js \
+		controllers/*.js \
+		public/js/*.js \
+		app.js \
+		server.js
+
+build: less docs
 	rm -rf ./public/js/.build
 	mkdir ./public/js/.build
 	node ./bin/compile.js
@@ -100,3 +112,5 @@ Darwin-install:
 	sed -i "" s/YOUR-REPO-NAME/`pwd | tr '/' '\n' \
 		| tail -1 | tr -d '\n'`/g `find . -type f | grep -v Makefile | grep -v .git | grep -v node_modules`
 	sed -i "" s/SESSION-SECRET/${HASH}/g `find ./config | grep json | grep -v .git`
+
+.PHONY: docs

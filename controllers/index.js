@@ -50,21 +50,13 @@ var initHelpers = function(app) {
       return req.url;
     },
     menu: function(req, res) {
-      if (res.hasOwnProperty('menu')) {
-        var _menu = res.menu;
-      } else if (req.session.auth && req.session.auth.loggedIn) {
-        menu.flush();
-        menu.add('/', 'Home');
-        menu.add('/logout', 'Logout');
-        _menu = menu.getItems();
-      } else {
-        menu.flush();
-        menu.add('/', {'name':'Home','count':5});
-        menu.add(config.ifitAuth.uri + '/register', 'Register');
-        menu.add(config.ifitAuth.uri + '/login?next=' + config.ifitAuth.callbackUri, 'Login');
-        _menu = menu.getItems();
-      }
-      return _menu;
+      return res.menu.getItems();
+    },
+    topMenu: function(req, res) {
+      return res.topMenu.getItems();
+    },
+    lowerMenu: function(req, res) {
+      return res.lowerMenu.getItems();
     }
   });
 

@@ -8,6 +8,7 @@ var ifitAuth = require('ifit-auth')
   , util = require('util')
   , model = require('./models')
   , controllers = require('./controllers')
+  , Menu = require('./lib/menu')
   , app = express.createServer();
 
 module.exports = app;
@@ -91,6 +92,22 @@ app.configure('development', 'test', function() {
 // Config for production environments
 app.configure('production', function() {
   app.use(express.errorHandler());
+});
+
+app.use(function(req, res, next) {
+  res.menu = new Menu();
+  res.topMenu = new Menu();
+  res.lowerMenu = new Menu();
+  res.menu.add('/', 'Home');
+  if (req.user) {
+    res.menu.add('/logout', 'Logout');
+  } else {
+    var loginUrl = config.ifitAuth.uri + '/login?next=' + config.ifitAuth.callbackUri;
+    var registerUrl = config.ifitAuth.uri + '/register';
+    res.menu.add(registerUrl, 'Register');
+    res.menu.add(loginUrl, 'Login');
+  }
+  next();
 });
 
 // Setup the controllers (routes)

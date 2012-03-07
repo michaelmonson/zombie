@@ -45,7 +45,7 @@ html
         if typeof(menu) != 'undefined'
           != partial('leftnav', {menu: menu, url: url})
         .span10
-          if typeof topmenu !== 'undefined'
-            != partial('topnav', {topMenu: topmenu, lowerMenu: lowermenu, url: url})
+          if typeof topMenu !== 'undefined'
+            != partial('topnav', {topMenu: topMenu, lowerMenu: lowerMenu, url: url})
           .row-fluid
             !=body

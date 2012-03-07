@@ -55,10 +55,10 @@ server-stop:
 	@ -kill -9 `cat $(SERVERPID)` > /dev/null 2>&1
 	@ echo 'DONE'
 	@ echo ''
+	@printf "\e[m"
 	@ -rm -f $(SERVERPID)
 	@ echo "Server log found in '$(SERVERLOG)'"
 	@ echo ''
-	@printf "\e[m"
 
 run:
 	./bin/watch.sh

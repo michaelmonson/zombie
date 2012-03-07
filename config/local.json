@@ -2,7 +2,7 @@
   "port": "3000",
   "mongodb": {
     "host": "mongo.db.ifit-dev.com",
-    "database": "YOUR-REPO-NAME",
+    "database": "YOUR-REPO-NAME_local",
     "port": 27017
   },
   "redis": {

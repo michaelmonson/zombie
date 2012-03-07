@@ -3,7 +3,7 @@ SHELL := /bin/bash
 SERVERLOG = ./tmp/test.log
 SERVERPID = ./tmp/server.pid
 OS = $(shell uname)
-HASH = $(shell cat /dev/urandom | head -c 100 | shasum | awk '{print $$1}' | tr -d '\n')
+ETCOK = $(shell cat /etc/hosts | grep alocal.ifit-dev.com | wc -l | tr -d ' ')
 
 main:
 	@echo "Available tasks:"
@@ -97,8 +97,27 @@ git-init:
 
 update: install
 
-install: ${OS}-install npm-install build
+install: ${OS}-install npm-install build check-hosts
 	touch README
+
+check-hosts: check-hosts-${ETCOK}
+
+check-hosts-0:
+	@printf "\e[0;31m"
+	@echo WARN:
+	@echo WARN: You dont appear to have your hosts file setup.
+	@echo WARN: Please add the following line to /etc/hosts
+	@echo WARN: to make sessions work properly:
+	@echo WARN:
+	@echo WARN: 127.0.0.1 local.ifit-dev.com
+	@echo WARN:
+	@printf "\e[m"
+
+check-hosts-1:
+	@#
+
+check-hosts-2:
+	@#
 
 npm-install:
 	npm install

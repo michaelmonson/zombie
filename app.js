@@ -13,7 +13,7 @@ var ifitAuth = require('ifit-auth')
 
 module.exports = app;
 
-app.configure('development', function() {
+app.configure('local', function() {
   var re = /img|images/;
   app.use(function(req, res, next) {
     if (req.url.match(re)) {
@@ -71,6 +71,22 @@ app.configure('production', function() {
 
 // Config for every environment
 app.configure(function() {
+  app.use(function(req, res, next) {
+    res.menu = new Menu();
+    res.topMenu = new Menu();
+    res.lowerMenu = new Menu();
+    res.menu.add('/', 'Home');
+    if (req.user) {
+      res.menu.add('/logout', 'Logout');
+    } else {
+      var loginUrl = config.ifitAuth.uri + '/login?next=' + config.ifitAuth.callbackUri;
+      var registerUrl = config.ifitAuth.uri + '/register';
+      res.menu.add(registerUrl, 'Register');
+      res.menu.add(loginUrl, 'Login');
+    }
+    next();
+  });
+
   app.use(express.session(sessOptions));
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
@@ -82,7 +98,7 @@ config.ifitAuth['protocol'] = config.protocol;
 //app.use(ifitAuth.middleware(config.ifitAuth));
 
 // Config for dev and test environments
-app.configure('development', 'test', function() {
+app.configure('local', 'development', 'test', function() {
   app.use(express.errorHandler({
     dumpExceptions : true,
     showStack : true
@@ -94,21 +110,6 @@ app.configure('production', function() {
   app.use(express.errorHandler());
 });
 
-app.use(function(req, res, next) {
-  res.menu = new Menu();
-  res.topMenu = new Menu();
-  res.lowerMenu = new Menu();
-  res.menu.add('/', 'Home');
-  if (req.user) {
-    res.menu.add('/logout', 'Logout');
-  } else {
-    var loginUrl = config.ifitAuth.uri + '/login?next=' + config.ifitAuth.callbackUri;
-    var registerUrl = config.ifitAuth.uri + '/register';
-    res.menu.add(registerUrl, 'Register');
-    res.menu.add(loginUrl, 'Login');
-  }
-  next();
-});
 
 // Setup the controllers (routes)
 controllers.init(app);

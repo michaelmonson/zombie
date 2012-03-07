@@ -106,11 +106,9 @@ npm-install:
 Linux-install:
 	sed -i s/YOUR-REPO-NAME/`pwd | tr '/' '\n' \
 		| tail -1 | tr -d '\n'`/g `find . -type f | grep -v Makefile | grep -v .git | grep -v node_modules`
-	sed -i s/SESSION-SECRET/${HASH}/g `find ./config | grep json | grep -v .git`
 
 Darwin-install:
 	sed -i "" s/YOUR-REPO-NAME/`pwd | tr '/' '\n' \
 		| tail -1 | tr -d '\n'`/g `find . -type f | grep -v Makefile | grep -v .git | grep -v node_modules`
-	sed -i "" s/SESSION-SECRET/${HASH}/g `find ./config | grep json | grep -v .git`
 
 .PHONY: docs

@@ -3,7 +3,7 @@ SHELL := /bin/bash
 SERVERLOG = ./tmp/test.log
 SERVERPID = ./tmp/server.pid
 OS = $(shell uname)
-ETCOK = $(shell cat /etc/hosts | grep alocal.ifit-dev.com | wc -l | tr -d ' ')
+ETCOK = $(shell cat /etc/hosts | grep local.ifit-dev.com | wc -l | tr -d ' ')
 
 main:
 	@echo "Available tasks:"

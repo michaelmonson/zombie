@@ -16,6 +16,7 @@ main:
 	@echo "    update"
 	@echo "    install"
 	@echo "    git-init"
+	@echo "    build"
 	@echo "   *clean"
 	@echo "   *new-project"
 	@echo
@@ -38,6 +39,7 @@ mocha-watch:
 		$(TESTS)
 
 server-start:
+	@printf "\e[0;31m"
 	@ echo ''
 	@ -mkdir -p `dirname $(SERVERLOG)` 2>&1
 	@ echo -n 'Starting Server... '
@@ -45,8 +47,10 @@ server-start:
 		sleep 0.3 \
 		&& echo $$! > $(SERVERPID) \
 		&& echo 'DONE')
+	@printf "\e[m"
 	
 server-stop:
+	@printf "\e[0;31m"
 	@ echo -n 'Shutting down Server... '
 	@ -kill -9 `cat $(SERVERPID)` > /dev/null 2>&1
 	@ echo 'DONE'
@@ -54,11 +58,15 @@ server-stop:
 	@ -rm -f $(SERVERPID)
 	@ echo "Server log found in '$(SERVERLOG)'"
 	@ echo ''
+	@printf "\e[m"
 
 run:
 	./bin/watch.sh
 
 docs:
+	@printf "\e[0;31m"
+	@echo BUILDING DOCS
+	@printf "\e[m"
 	@rm -rf docs
 	@./node_modules/.bin/docco-husky \
 		-name "`pwd | tr '/' '\n' | tail -1 | tr -d '\n' | tr '-' ' '`" \
@@ -73,24 +81,35 @@ docs:
 build: less docs
 	rm -rf ./public/js/.build
 	mkdir ./public/js/.build
+	@printf "\e[0;31m"
+	@echo COMPILING JAVASCRIPT
+	@printf "\e[m"
 	node ./bin/compile.js
 
 less-watch: less
 	@sleep 100000000
 
 less:
-	@echo -n compiling css...
+	@printf "\e[0;31m"
+	@echo -n COMPILING CSS...
 	@./node_modules/.bin/lessc -x public/less/main.less public/css/style.css
 	@rm -f public/css/tmp.less
-	@echo done
+	@echo DONE
+	@printf "\e[m"
 
 new-project: clean install git-init
 
 clean:
+	@printf "\e[0;31m"
+	@echo REMOVING GIT REPO
+	@printf "\e[m"
 	rm -rf .git
 	rm -rf README.md
 
 git-init:
+	@printf "\e[0;31m"
+	@echo INITING GIT REPO
+	@printf "\e[m"
 	git init
 	git add .
 	git commit -m "Initial commit"
@@ -109,7 +128,7 @@ check-hosts-0:
 	@echo WARN: Please add the following line to /etc/hosts
 	@echo WARN: to make sessions work properly:
 	@echo WARN:
-	@echo WARN: 127.0.0.1 local.ifit-dev.com
+	@echo "WARN:    127.0.0.1   local.ifit-dev.com"
 	@echo WARN:
 	@printf "\e[m"
 
@@ -120,6 +139,9 @@ check-hosts-2:
 	@#
 
 npm-install:
+	@printf "\e[0;31m"
+	@echo INSTALLING NPM MODULES
+	@printf "\e[m"
 	npm install
 
 Linux-install:

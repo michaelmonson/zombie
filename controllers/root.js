@@ -1,7 +1,7 @@
 "use strict";
 
 var ifitAuth = require('ifit-auth')
-  , login = require('ifit-auth').requireLoggedIn;
+  , login = ifitAuth.requireLoggedIn;
 
 // Init the base routes of the application
 var home = function (req, res) {
@@ -13,20 +13,8 @@ var logout = function (req, res) {
   res.redirect('/');
 };
 
-var secret = function (req, res) {
-  var me = {};
-  // if you need data from /me in the browser, just make an XHR to https://[AUTH_URI]/me
-  ifitAuth.me(req.headers, function(_me, _res) {
-    if(!_me) return;
-    me = _me;
-    console.log(me.email);
-  });
-  res.render('secret');
-};
-
 exports.init = function (app) {
   app.get('/', home);
-  app.get('/secret', login, secret);
   app.get('/logout', logout);
 }
 

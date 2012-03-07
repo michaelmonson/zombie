@@ -71,12 +71,16 @@ app.configure('production', function() {
 
 // Config for every environment
 app.configure(function() {
+  app.use(express.session(sessOptions));
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'jade');
+
   app.use(function(req, res, next) {
     res.menu = new Menu();
     res.topMenu = new Menu();
     res.lowerMenu = new Menu();
     res.menu.add('/', 'Home');
-    if (req.user) {
+    if (req.session && req.session.auth) {
       res.menu.add('/logout', 'Logout');
     } else {
       var loginUrl = config.ifitAuth.uri + '/login?next=' + config.ifitAuth.callbackUri;
@@ -87,15 +91,7 @@ app.configure(function() {
     next();
   });
 
-  app.use(express.session(sessOptions));
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
-  //ifitAuth.helpExpress(app);
 });
-
-// login magic
-config.ifitAuth['protocol'] = config.protocol;
-//app.use(ifitAuth.middleware(config.ifitAuth));
 
 // Config for dev and test environments
 app.configure('local', 'development', 'test', function() {

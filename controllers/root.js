@@ -24,14 +24,9 @@ var secret = function (req, res) {
   res.render('secret');
 };
 
-var test = function(req, res, next) {
-  console.log(req.session);
-  next();
-}
-
 exports.init = function (app) {
   app.get('/', home);
-  app.get('/secret', test, login, secret);
+  app.get('/secret', login, secret);
   app.get('/logout', logout);
 }
 

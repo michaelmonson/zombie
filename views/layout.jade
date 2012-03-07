@@ -43,9 +43,9 @@ html
     #main.container-fluid
       .row-fluid
         if typeof(menu) != 'undefined'
-          != partial('leftnav', {menu: menu, url: url})
+          != partial('_leftnav', {menu: menu, url: url})
         .span10
           if typeof topMenu !== 'undefined'
-            != partial('topnav', {topMenu: topMenu, lowerMenu: lowerMenu, url: url})
+            != partial('_topnav', {topMenu: topMenu, lowerMenu: lowerMenu, url: url})
           .row-fluid
             !=body

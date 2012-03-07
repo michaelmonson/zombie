@@ -1,6 +1,7 @@
 "use strict";
 
-var ifitAuth = require('ifit-auth');
+var ifitAuth = require('ifit-auth')
+  , login = require('ifit-auth').requireLoggedIn;
 
 // Init the base routes of the application
 var home = function (req, res) {
@@ -23,9 +24,14 @@ var secret = function (req, res) {
   res.render('secret');
 };
 
+var test = function(req, res, next) {
+  console.log(req.session);
+  next();
+}
+
 exports.init = function (app) {
   app.get('/', home);
-  app.get('/secret', secret);
+  app.get('/secret', test, login, secret);
   app.get('/logout', logout);
 }
 

@@ -36,7 +36,7 @@ var mongoUri = (function () {
 
 // Create an individual connection to the database.  You MUST use
 // createConnection, as connect() is shared globally.
-db = mongoose.createConnection(mongoUri, function(err) {
+exports.db = db = mongoose.createConnection(mongoUri, function(err) {
   if(err) {
     console.log('connection error: ' + require('util').inspect(err));
   }

@@ -39,32 +39,13 @@ html
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.brand(href='#') YOUR-REPO-NAME
-          .nav-collapse
-            ul.nav
-              each name,path in menu
-                if url == path
-                  li.active
-                    a(href=path)!=name
-                else
-                  li
-                    a(href=path)!=name
-              
+          a.brand(href='/') YOUR-REPO-NAME
     #main.container-fluid
       .row-fluid
-        if (typeof(subnav) != 'undefined')
-          .span2.fixed
-            .well.sidebar-nav
-              ul.nav.nav-list
-                each name,path in subnav
-                  if url == path
-                    li.active
-                      a(href=path)!=name
-                  else
-                    li
-                      a(href=path)!=name
-          .span10
-            !=body
-        else
-          .span12
+        if typeof(menu) != 'undefined'
+          != partial('leftnav', {menu: menu, url: url})
+        .span10
+          if typeof topmenu !== 'undefined'
+            != partial('topnav', {topMenu: topmenu, lowerMenu: lowermenu, url: url})
+          .row-fluid
             !=body

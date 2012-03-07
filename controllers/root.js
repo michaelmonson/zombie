@@ -26,5 +26,6 @@ var secret = function (req, res) {
 exports.init = function (app) {
   app.get('/', home);
   app.get('/secret', secret);
+  app.get('/logout', logout);
 }
 

@@ -43,20 +43,23 @@ var initHelpers = function(app) {
     googleAnalyticsId: function () {
       return config.googleAnalyticsId;
     },
+    session: function(req, res) {
+      return req.session;
+    },
     url: function(req, res) {
       return req.url;
     },
     menu: function(req, res) {
       if (res.hasOwnProperty('menu')) {
         var _menu = res.menu;
-      } else if (req.hasOwnProperty('user')) {
+      } else if (req.session.auth && req.session.auth.loggedIn) {
         menu.flush();
         menu.add('/', 'Home');
         menu.add('/logout', 'Logout');
         _menu = menu.getItems();
       } else {
         menu.flush();
-        menu.add('/', 'Home');
+        menu.add('/', {'name':'Home','count':5});
         menu.add(config.ifitAuth.uri + '/register', 'Register');
         menu.add(config.ifitAuth.uri + '/login?next=' + config.ifitAuth.callbackUri, 'Login');
         _menu = menu.getItems();
@@ -72,9 +75,11 @@ exports.init = function(app) {
   Object.keys(exports).map(function(name){
     if (name === 'init') { return; } // not interested in ourselves
     if (name === 'root') { return; } // root goes last
+    if (name === 'errors') { return; } // errors goes last
     initController(app, name);
   });
   initController(app, 'root'); // root goes last
+  initController(app, 'errors'); // errors goes last
   initHelpers(app);
 };
 

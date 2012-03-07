@@ -4,15 +4,17 @@
 function NotFound(msg) {
   this.name = 'NotFound';
   Error.call(this, msg);
-  Error.captureStackTrace(this, arguments.callee);
 };
 
 NotFound.prototype = new Error();
 
 var renderError = function(err, req, res, next) {
   var defaultError = 'An error occured.'
-    , format;
-  if (err instanceof NotFound) {
+    , format
+    , message
+    , log;
+  if (err instanceof NotFound
+    || err.message.toLowerCase().trim() == 'not found') {
     res.render('errors/404', {
       locals: {
         title: '404 - Not Found',

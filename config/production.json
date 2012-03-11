@@ -4,7 +4,7 @@
     "username": "",
     "password": "",
     "host": "mongo.db.ifit-beta.com",
-    "database": "YOUR-REPO-NAME_prod",
+    "database": "YOUR-REPO-NAME",
     "port": 27017
   },
   "redis": {

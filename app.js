@@ -8,6 +8,7 @@ var ifitAuth = require('ifit-auth')
   , util = require('util')
   , model = require('./models')
   , controllers = require('./controllers')
+  , menus = require('./config/menus')
   , Menu = require('./lib/menu')
   , app = express.createServer();
 
@@ -76,17 +77,12 @@ app.configure(function() {
   app.set('view engine', 'jade');
 
   app.use(function(req, res, next) {
-    res.menu = new Menu();
     res.topMenu = new Menu();
     res.lowerMenu = new Menu();
-    res.menu.add('/', 'Home');
     if (req.session && req.session.auth) {
-      res.menu.add('/logout', 'Logout');
+      res.menu = menus.postLogin;
     } else {
-      var loginUrl = config.ifitAuth.uri + '/login?next=' + config.ifitAuth.callbackUri;
-      var registerUrl = config.ifitAuth.uri + '/register';
-      res.menu.add(registerUrl, 'Register');
-      res.menu.add(loginUrl, 'Login');
+      res.menu = menus.prelogin;
     }
     next();
   });

@@ -6,18 +6,30 @@ var config = require('../config')
   , fs = require('fs')
   , env = require('confrodo').env
   , version = require('../public/js/version').version
-  , menu = require('../lib/menu')
-  , files = fs.readdirSync(__dirname);
+  , menu = require('../lib/menu');
 
-// Load each Controller module
-files.forEach(function (file) {
-  var name, match = /^([A-Za-z_]*)\.js$/.exec(file);
+loadDir(__dirname);
+
+function loadDir(path) {
+  var files = fs.readdirSync(path);
+  files.forEach(function (file) {
+    var fullPath = path + '/' + file;
+    var stats = fs.statSync(fullPath);
+    if (stats.isFile()) {
+      matchFile(fullPath.replace(__dirname, ''));
+    } else if (stats.isDirectory()) {
+      loadDir(fullPath);
+    }
+  });
+}
+
+function matchFile(file) {
+  var match = /^(.*?\/([A-Za-z_]*))\.js$/.exec(file);
   if (match) {
-    name = match[1];
-    if (name === 'index') { return; } // Don't include this file
-    exports[name] = require('./' + file);  // Load the controller 
+    if (file === '/index.js') { return; } // Don't include this file
+    exports[match[2]] = require('.' + file);  // Load the controller 
   }
-});
+}
 
 var initController = function(app, name) {
   var controller = exports[name];

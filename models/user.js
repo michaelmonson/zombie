@@ -2,11 +2,10 @@ var mongoose = require('mongoose')
   , ifitAuth = require('ifit-auth')
   , config = require('../config')
   , Schema = mongoose.Schema
-  , ObjectId = mongoose.SchemaTypes.ObjectId
-  , User;
+  , ObjectId = mongoose.SchemaTypes.ObjectId;
 
 
-var UserSchema = new mongoose.Schema({
+var UserSchema = new Schema({
   ifit: {
     id: String,
     created: { type: Date, 'default': Date.now },
@@ -15,8 +14,8 @@ var UserSchema = new mongoose.Schema({
 
 UserSchema.index({ 'ifit.id': 1 }, { unique: true });
 
-module.exports.findOrCreateUser = ifitAuth.findUserById = function (userId, callback) {
-  User.findOne({'ifit.id': userId}, function(err, doc) {
+UserSchema.statics.findOrCreateUser = ifitAuth.findUserById = function (userId, callback) {
+  models.User.findOne({'ifit.id': userId}, function(err, doc) {
     if (err) {
       return callback(err, null);
     }

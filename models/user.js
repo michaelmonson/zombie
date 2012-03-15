@@ -2,7 +2,8 @@ var mongoose = require('mongoose')
   , ifitAuth = require('ifit-auth')
   , config = require('../config')
   , Schema = mongoose.Schema
-  , ObjectId = mongoose.SchemaTypes.ObjectId;
+  , ObjectId = mongoose.SchemaTypes.ObjectId
+  , models = require('./');
 
 
 var UserSchema = new Schema({

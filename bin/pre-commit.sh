@@ -3,11 +3,14 @@ EXTRANEOUS=`npm ls | grep extraneous | awk '{print "  "$2}'`
 if [ -n "$EXTRANEOUS" ]
 then
 	printf "\e[0;31m"
+  echo
+  echo 'WARNING:'
   echo 'Extraneous packages found.'
   echo 'You should probably delete these or add them to package.json'
   echo
   echo 'Offending Packages:'
   echo "$EXTRANEOUS"
+  echo
 	printf "\e[m"
 else
   echo 'No extraneous packages'

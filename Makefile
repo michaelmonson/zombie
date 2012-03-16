@@ -119,7 +119,8 @@ update: install
 
 install: ${OS}-install npm-install build check-hosts
 	touch README.md
-	ln -s ./bin/pre-commit-sh ./.git/hooks/pre-commit
+	rm -f ./.git/hooks/pre-commit
+	ln -s ../../bin/pre-commit.sh ./.git/hooks/pre-commit
 
 check-hosts: check-hosts-${ETCOK}
 

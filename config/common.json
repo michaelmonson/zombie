@@ -17,5 +17,10 @@
       "script.js"
     ]
   },
+  "contacts": [
+    "chase@ifit.com",
+    "801-709-1245 Sprint",
+    "435-232-1024 Sprint"
+  ],
   "googleAnalyticsId": "123456789"
 }

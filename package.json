@@ -21,10 +21,15 @@
     "natural": "*",
     "optimus": "*",
     "redis": "*",
+    "sms-address": "*",
     "socket.io": "*",
     "supervisor": "*",
     "validator": "*",
     "uglify-js": "*",
+    "winston": "*",
+    "winston-express": "*",
+    "winston-mail": "*",
+    "winston-mongodb": "*",
     "ifit-auth": "git+ssh://git@github.com:ifit/auth-client.git#master"
   },
   "devDependencies": {

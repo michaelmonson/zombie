@@ -2,6 +2,7 @@
 
 var ifitAuth = require('ifit-auth')
   , express = require('express')
+  , winstonExpress = require('winston-express')
   , connectRedis = require('connect-redis')
   , config = require('./config')
   , io = require('socket.io')
@@ -10,6 +11,7 @@ var ifitAuth = require('ifit-auth')
   , controllers = require('./controllers')
   , menus = require('./config/menus')
   , Menu = require('./lib/menu')
+  , winston = require('./lib/log')
   , app = express.createServer();
 
 module.exports = app;
@@ -102,6 +104,7 @@ app.configure('production', function() {
   app.use(express.errorHandler());
 });
 
+winstonExpress(app, winston);
 
 // Setup the controllers (routes)
 controllers.init(app);

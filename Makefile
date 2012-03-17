@@ -105,6 +105,7 @@ clean:
 	@printf "\e[m"
 	rm -rf .git
 	rm -rf README.md
+	touch README.md
 
 git-init:
 	@printf "\e[0;31m"
@@ -117,7 +118,9 @@ git-init:
 update: install
 
 install: ${OS}-install npm-install build check-hosts
-	touch README
+	touch README.md
+	rm -f ./.git/hooks/pre-commit
+	ln -s ../../bin/pre-commit.sh ./.git/hooks/pre-commit
 
 check-hosts: check-hosts-${ETCOK}
 

@@ -62,13 +62,13 @@ function initHelpers(app) {
       return req.url;
     },
     menu: function(req, res) {
-      return res.menu.getItems();
+      return (res.menu ? res.menu.getItems() : [])
     },
     topMenu: function(req, res) {
-      return res.topMenu.getItems();
+      return (res.topMenu ? res.topMenu.getItems() : []);
     },
     lowerMenu: function(req, res) {
-      return res.lowerMenu.getItems();
+      return (res.lowerMenu ? res.lowerMenu.getItems() : []);
     }
   });
 

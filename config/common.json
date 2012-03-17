@@ -10,11 +10,17 @@
     "main": [
       "lib/bootstrap.min.js",
       "lib/jquery-1.7.1.min.js",
+      "lib/underscore-min.js",
       "lib/backbone-0.9.1.min.js"
     ],
     "onload": [
       "script.js"
     ]
   },
+  "contacts": [
+    "chase@ifit.com",
+    "801-709-1245 Sprint",
+    "435-232-1024 Sprint"
+  ],
   "googleAnalyticsId": "123456789"
 }

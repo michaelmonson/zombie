@@ -13,7 +13,7 @@ var fs = require('fs')
   , js;
 
 version = crypto.randomBytes(9).toString('base64')
-                .replace('+', '0').replace('/', '1');
+                .replace(/\+/g, '0').replace(/\//g, '1');
 versionjson = JSON.stringify({'version': version});
 fs.mkdirSync(prefix + '/.build/' + version, 0755);
 fs.writeFileSync(prefix + '/version.json', versionjson);

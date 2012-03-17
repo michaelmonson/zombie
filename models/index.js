@@ -50,7 +50,7 @@ loadDir(__dirname);
 
 function loadDir(path) {
   var files = fs.readdirSync(path);
-  files.forEach(function (file) {
+  files.forEach(function inspectFile(file) {
     var fullPath = path + '/' + file;
     var stats = fs.statSync(fullPath);
     if (stats.isFile()) {

@@ -12,7 +12,7 @@ loadDir(__dirname);
 
 function loadDir(path) {
   var files = fs.readdirSync(path);
-  files.forEach(function (file) {
+  files.forEach(function inspectFile(file) {
     var fullPath = path + '/' + file;
     var stats = fs.statSync(fullPath);
     if (stats.isFile()) {
@@ -31,7 +31,7 @@ function matchFile(file) {
   }
 }
 
-var initController = function(app, name) {
+function initController(app, name) {
   var controller = exports[name];
   if (controller) {
     if (typeof(controller.init) === 'function') {
@@ -40,7 +40,7 @@ var initController = function(app, name) {
   }
 };
 
-var initHelpers = function(app) {
+function initHelpers(app) {
   new natural.NounInflector().attach();
 
   // Static Helpers
@@ -75,15 +75,15 @@ var initHelpers = function(app) {
 };
 
 // init each controller
-exports.init = function(app) {
+exports.init = function init(app) {
   Object.keys(exports).map(function(name){
     if (name === 'init') { return; } // not interested in ourselves
-    if (name === 'root') { return; } // root goes last
+    if (name === 'root') { return; } // root goes second to last
     if (name === 'errors') { return; } // errors goes last
     initController(app, name);
   });
-  initController(app, 'root'); // root goes last
-  initController(app, 'errors'); // errors goes last
+  initController(app, 'root');
+  initController(app, 'errors');
   initHelpers(app);
 };
 

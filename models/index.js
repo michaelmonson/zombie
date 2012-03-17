@@ -15,7 +15,7 @@ defaults = {
 
 // Get the mongo config from the config file where possible
 
-var mongoUri = (function () {
+var mongoUri = exports.mongoUri = (function () {
   var mongoConfig = config.mongodb || defaults
     , uri = 'mongodb://';
 

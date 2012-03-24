@@ -5,7 +5,8 @@ var ifitAuth = require('ifit-auth')
 
 // Init the base routes of the application
 var home = function (req, res) {
-  res.render('home');
+  console.log('hai');
+  res.render('world');
 };
 
 var logout = function (req, res) {

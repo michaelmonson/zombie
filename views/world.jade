@@ -1,0 +1,112 @@
+#world(style="position:relative")
+script
+  $(function() {
+    var id = 1;
+    var players = {}
+    var world = $("#world");
+    var self = $("<div/>");
+    var zombies = [];
+    var divPool = [];
+
+    var socket = io.connect();
+
+    socket.on('connection', function(){
+      id = socket.socket.sessionid;
+    });
+
+    var e = $("body");
+
+    var speedX = 0 
+      , speedY = 0;
+
+    e.bind('keyup', function(e) {
+      switch (e.which) {
+        case 37: speedX = 0; break; // left
+        case 38: speedY = 0; break; // up
+        case 39: speedX = 0; break; // right
+        case 40: speedY = 0; break; // down
+      }
+      emit();
+    });
+
+    e.bind('keydown', function(e) {
+      switch (e.which) {
+        case 37: speedX =  1; break; // left
+        case 38: speedY =  1; break; // up
+        case 39: speedX = -1; break; // right
+        case 40: speedY = -1; break; // down
+      }
+      emit();
+    });
+
+    function emit() {
+      socket.emit('move', {x: speedX, y: speedY});
+    }
+
+    var socket = io.connect();
+    window.socket = socket;
+
+    socket.on("people", function(msg) {
+      players = msg;
+      update();
+    });
+
+    socket.on("zombies", function(msg) {
+      zombies = msg;
+      update();
+    });
+
+    self.addClass("self");
+    self.addClass("marine").addClass("standing").addClass("r0");
+    world.append(self);
+
+    for (var i = 0; i < 10000; ++i) {
+      divPool.push($("<div/>"));
+    }
+
+    function update() {
+      for (var i = 0; i < zombies.length; ++i) {
+        var tmpz = divPool[i];
+        tmpz.removeClass();
+        tmpz.addClass("zombie");
+        var ox = zombies[i].lastX;
+        var oy = zombies[i].lastY;
+        if (zombies[i].active) {
+          tmpz.addClass("walking1");
+        } else {
+          tmpz.addClass("death7");
+        }
+        tmpz.addClass(getAngle(ox, oy));
+        var px = 0, py = 0;
+        if (players.hasOwnProperty(id)) {
+        var px = players[id].x, py = players[id].y;
+        }
+        tmpz.css({
+          position:'absolute',
+          top:zombies[i].y - px,
+          left:zombies[i].x - py
+        });
+        world.append(tmpz);
+      }
+    }
+  });
+
+  function getAngle(ox, oy) {
+    if (ox ===  1 && oy ===  1) {
+      return "r45";
+    } else if (ox ===  1 && oy ===  0) {
+      return "r90";
+    } else if (ox ===  1 && oy === -1) {
+      return "r135";
+    } else if (ox ===  0 && oy === -1) {
+      return "r180";
+    } else if (ox === -1 && oy ===  0) {
+      return "r270";
+    } else if (ox === -1 && oy === -1) {
+      return "r225";
+    } else if (ox === -1 && oy ===  1) {
+      return "r315";
+    } else {
+      return "r0";
+    }
+  }

@@ -1,12 +1,12 @@
 {
-  "port": "3000",
+  "port": "8080",
   "mongodb": {
-    "host": "mongo.db.ifit-dev.com",
+    "host": "mongo.db.internal.ifit-dev.com",
     "database": "zombie",
     "port": 27017
   },
   "redis": {
-    "host": "redis.db.ifit-dev.com",
+    "host": "redis.db.internal.ifit-dev.com",
     "port": 6379,
     "options" : {}
   },

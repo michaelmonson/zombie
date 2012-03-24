@@ -11,21 +11,31 @@ function random_direction() {
   return { x: rand_dir(), y: rand_dir() };
 }
 
-function Undead(x, y) {
+function Zombie(x, y) {
   AnimateThing.call(this, x, y);
   this.direction = random_direction();
   this.active = true;
   this.x = x;
   this.y = y;
 }
-Undead.prototype = new AnimateThing();
-module.exports = Undead;
+Zombie.prototype = new AnimateThing();
+module.exports = Zombie;
 
-Undead.prototype.attacked = function() {
+Zombie.prototype.attacked = function() {
   this.active = false;
 };
 
-Undead.prototype.change_direction = function() {
+Zombie.prototype.turn_left = function() {
+  var d = this.direction;
+  if (d.y == 1 && d.x > -1) {
+    d.x --;
+  }
+};
+
+Zombie.prototype.turn_right = function() {
+};
+
+Zombie.prototype.change_direction = function() {
   var r = Math.random() * 100;
   if (r < 20) { // turn left
     this.turn_left();
@@ -35,7 +45,7 @@ Undead.prototype.change_direction = function() {
   } 
 }
 
-Undead.prototype.update_direction = function() {
+Zombie.prototype.update_direction = function() {
   if (this.target) {
 
   } else {
@@ -43,7 +53,7 @@ Undead.prototype.update_direction = function() {
   }
 };
 
-Undead.prototype.shuffle = function() {
+Zombie.prototype.shuffle = function() {
   this.update_direction();
   this.move(this.direction);
 };

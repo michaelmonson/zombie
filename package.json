@@ -30,7 +30,8 @@
     "winston-express": "*",
     "winston-mail": "*",
     "winston-mongodb": "*",
-    "ifit-auth": "git+ssh://git@github.com:ifit/auth-client.git#master"
+    "ifit-auth": "git+ssh://git@github.com:ifit/auth-client.git#master",
+    "everyauth": "*"
   },
   "devDependencies": {
     "mocha": "*",

@@ -6,3 +6,4 @@ exports.init = function(app) {
     res.render('zombie');
   });
 }
+

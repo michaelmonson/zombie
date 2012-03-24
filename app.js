@@ -112,14 +112,16 @@ controllers.init(app);
 
 world.create();
 
-console.log('updatesdf: ' + util.inspect(world.zombieUpdate()));
-
 // Start the server
 app.listen(config.port);
 
 //Setup Socket.IO
 var io = io.listen(app);
 io.sockets.on('connection', function(socket) {
+  
+  socket.emit('connection', "connected");
+  console.log('connected');
+  
   console.log('Client Connected');
   socket.on('message', function(message) {
     world.personUpdate(socket.id, message.x, message, y);

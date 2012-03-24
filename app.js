@@ -112,6 +112,8 @@ controllers.init(app);
 
 world.create();
 
+console.log('updatesdf: ' + util.inspect(world.zombieUpdate()));
+
 // Start the server
 app.listen(config.port);
 

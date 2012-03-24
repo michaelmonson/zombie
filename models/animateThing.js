@@ -44,4 +44,12 @@ AnimateThing.prototype.toString = function() {
   return 'x: ' + this.x + ' y: ' + this.y;
 }
 
+AnimateThing.prototype.updateObject = function() {
+  return {
+    x: this.x,
+    y: this.y,
+    active: this.active
+  }
+}
+
 module.exports = AnimateThing;//AnimateThing;

@@ -9,7 +9,7 @@ var mongoose = require('mongoose')
 
 defaults = {
   host: 'localhost',
-  database: 'YOUR-REPO-NAME',
+  database: 'zombie',
   port: 27017
 };
 

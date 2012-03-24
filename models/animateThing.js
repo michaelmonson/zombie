@@ -25,7 +25,7 @@ AnimateThing.prototype.move = function(_x, _y) {
 };
 
 AnimateThing.prototype.checkGridLimits = function() {
-  var b = world.bounds;
+  var b = {x: 1000, y: 1000};
   if(b.x * -1 < this.x) {
     this.x = b.x
   } 

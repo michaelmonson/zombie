@@ -48,12 +48,15 @@ script
 
     socket.on("people", function(msg) {
       players = msg;
-      update();
+      update(false);
     });
 
     socket.on("zombies", function(msg) {
       zombies = msg;
       update();
+    });
+
+    socket.on("death", function(msg) {
     });
 
     self.addClass("self");
@@ -64,7 +67,7 @@ script
       divPool.push($("<div/>"));
     }
 
-    function update() {
+    function update(kill) {
       world.html('');
       world.append(self);
       var pooli = -1;
@@ -94,16 +97,30 @@ script
         var oy = zombies[i].lastY;
         if (zombies[i].active) {
           tmpz.addClass("walking1");
-        } else {
-          tmpz.addClass("death7");
+          tmpz.addClass(getAngle(ox, oy));
+          tmpz.css({
+            position:'absolute',
+            top:zombies[i].y - px,
+            left:zombies[i].x - py
+          });
+          world.append(tmpz);
+        } else if (kill) {
+          tmpz.addClass("dead0");
+          (function(z) {
+            var step = 0;
+            var int = setInterval(function() {
+              if (step < 7) {
+                z.removeClass("dead" + step);
+                ++step;
+                z.addClass("dead" + step);
+              }
+            }, 100);
+            setTimeout(function() {
+              z.remove();
+            }, 2000);
+            world.append(z);
+          })(tmpz.cone());
         }
-        tmpz.addClass(getAngle(ox, oy));
-        tmpz.css({
-          position:'absolute',
-          top:zombies[i].y - px,
-          left:zombies[i].x - py
-        });
-        world.append(tmpz);
       }
     }
   });

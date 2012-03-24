@@ -3,11 +3,10 @@
 $(document).ready(function(){
 
   var socket = io.connect();
-  socket = io.connect();
 
   
-  socket.on('con', function(){
-    console.log("socket.id" + socket.id);
+  socket.on('connection', function(){
+    console.log("socket.id" + socket.socket.sessionid);
   });
   
   

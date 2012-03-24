@@ -119,8 +119,8 @@ app.listen(config.port);
 var io = io.listen(app);
 io.sockets.on('connection', function(socket) {
   
-  socket.emit('con', "conencted");
-  
+  socket.emit('connection', "connected");
+  console.log('connected');
   
   console.log('Client Connected');
   socket.on('message', function(message) {

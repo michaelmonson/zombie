@@ -122,13 +122,24 @@ var io = io.listen(app);
 io.sockets.on('connection', function(socket) {
   console.log('Client Connected');
   socket.on('message', function(message) {
-    socket.broadcast.send(message);
-    socket.send(message);
+    world.personUpdate(socket.id, message.x, message, y);
   });
   socket.on('disconnect', function() {
     console.log('Client Disconnected.');
   });
+  socket.on()
 });
+
+function emitZombies() {
+  io.sockets.broadcast.emit('message', world.zombieUpdate());
+}
+
+function emitPeople() {
+  io.sockets.broadcast.emit('message', world.peopleUpdate());
+}
+
+setInterval(emitZombies, 200);
+setInterval(emitPeople, 200);
 
 console.log('Listening on http://localhost:' + config.port +
             ' in ' + config.env + ' mode.');

@@ -4,25 +4,12 @@
 function AnimateThing(_x, _y) {
   this.x = _x || 0;
   this.y = _y || 0;
-  this.lastX = 0;
-  this.lastY = 0;
+  this.lastX = Math.random() > .5 ? -1 : 1;
+  this.lastY = Math.random() > .5 ? -1 : 1;
   this.positionDirty = false;
   this.active = true;
+  
 }
-
-AnimateThing.prototype.move = function(_x, _y) {
-  this.x += _x;
-  this.y += _y;
-  checkGridLimits();
-  if(_x != 0) {
-    this.lastX = _x;
-    positionDirty = true;
-  }
-  if(_y != 0) {
-    this.lastY = _y;
-    positionDirty = true;
-  }
-};
 
 AnimateThing.prototype.checkGridLimits = function() {
   var b = {x: 1000, y: 1000};
@@ -40,16 +27,22 @@ AnimateThing.prototype.checkGridLimits = function() {
   }
 }
 
+AnimateThing.prototype.move = function(_x, _y) {
+  this.x += _x;
+  this.y += _y;
+  this.checkGridLimits();
+  if(_x != 0) {
+    this.lastX = _x;
+    this.positionDirty = true;
+  }
+  if(_y != 0) {
+    this.lastY = _y;
+    this.positionDirty = true;
+  }
+};
+
 AnimateThing.prototype.toString = function() {
   return 'x: ' + this.x + ' y: ' + this.y;
-}
-
-AnimateThing.prototype.updateObject = function() {
-  return {
-    x: this.x,
-    y: this.y,
-    active: this.active
-  }
 }
 
 module.exports = AnimateThing;//AnimateThing;

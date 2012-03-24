@@ -21,7 +21,7 @@ UserSchema.statics.findOrCreateUser = ifitAuth.findUserById = function (userId, 
       return callback(err, null);
     }
 
-    if(doc) {
+    if (doc) {
       return callback(null, doc);
     }
 

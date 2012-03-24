@@ -131,11 +131,11 @@ io.sockets.on('connection', function(socket) {
 });
 
 function emitZombies() {
-  io.sockets.broadcast.emit('message', world.zombieUpdate());
+  io.sockets.emit('zombies', world.zombieUpdate());
 }
 
 function emitPeople() {
-  io.sockets.broadcast.emit('message', world.peopleUpdate());
+  io.sockets.emit('people', world.peopleUpdate());
 }
 
 setInterval(emitZombies, 200);

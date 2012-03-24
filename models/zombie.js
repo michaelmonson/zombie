@@ -7,16 +7,8 @@ function rand_dir() {
   return Math.floor(Math.random()*3) - 1;
 }
 
-function random_direction() {
-  return { x: rand_dir(), y: rand_dir() };
-}
-
 function Zombie(x, y) {
   AnimateThing.call(this, x, y);
-  this.direction = random_direction();
-  this.active = true;
-  this.x = x;
-  this.y = y;
 }
 Zombie.prototype = new AnimateThing();
 module.exports = Zombie;
@@ -25,14 +17,28 @@ Zombie.prototype.attacked = function() {
   this.active = false;
 };
 
-Zombie.prototype.turn_left = function() {
-  var d = this.direction;
-  if (d.y == 1 && d.x > -1) {
-    d.x --;
+Zombie.prototype.turn_right = function() {
+  if (this.lastX == 1 && this.lastY > -1) {
+    this.lastY --;
+  } else if (this.lastY == -1 && this.lastX > -1) {
+    this.lastX --;
+  } else if (this.lastX == -1 && this.lastY < 1) {
+    this.lastY ++;
+  } else if (this.lastY == 1 && this.lastX < 1) {
+    this.lastX ++;
   }
 };
 
-Zombie.prototype.turn_right = function() {
+Zombie.prototype.turn_left = function() {
+  if (this.lastY == 1 && this.lastX > -1) {
+    this.lastX --;
+  } else if (this.lastX == -1 && this.lastY > -1) {
+    this.lastY --;
+  } else if (this.lastY == -1 && this.lastX < 1) {
+    this.lastX ++;
+  } else if (this.lastX == 1 && this.lastY < 1) {
+    this.lastY ++;
+  }
 };
 
 Zombie.prototype.change_direction = function() {
@@ -55,6 +61,6 @@ Zombie.prototype.update_direction = function() {
 
 Zombie.prototype.shuffle = function() {
   this.update_direction();
-  this.move(this.direction);
+  this.move(this.lastX, this.lastY);
 };
 

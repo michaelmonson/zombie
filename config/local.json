@@ -7,7 +7,7 @@
   },
   "redis": {
     "awshost": "redis.db.ifit-dev.com",
-    "host": "localhost",
+    "host": "redis.db.ifit-dev.com",
     "port": 6379,
     "options" : {}
   },

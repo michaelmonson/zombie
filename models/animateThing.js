@@ -1,66 +1,47 @@
 "use strict";
 
-var world = require('../lib/world');
-
 // ### Menu class
-function AnimateThing() {
-  this.x = 0;
-  this.y = 0;
+function AnimateThing(_x, _y) {
+  this.x = _x || 0;
+  this.y = _y || 0;
+  this.lastX = 0;
+  this.lastY = 0;
+  this.positionDirty = false;
+  this.active = true;
 }
 
-/*
- * N, NE, E, SE, S, SW, W, NW 
- */
-AnimateThing.prototype.move = function(direction) {
-  direction = direction || "n";
-  direction.toLowerCase();
-  
-  switch(direction) {
-    case 'n':
-      this.y++;
-      break;
-    case 'ne':
-      this.y++;
-      this.x++;
-      break;
-    case 'e':
-      this.x++;
-      break;
-    case 'se':
-      this.x++;
-      this.y--;
-      break;
-    case 's':
-      this.y--;
-      break;
-    case 'sw':
-      this.y--;
-      this.x--;
-      break;
-    case 'w':
-      this.x--;
-      break;
-    case 'nw':
-      this.x--;
-      this.y++;
-      break;
-  }
+AnimateThing.prototype.move = function(_x, _y) {
+  this.x += _x;
+  this.y += _y;
   checkGridLimits();
+  if(_x != 0) {
+    this.lastX = _x;
+    positionDirty = true;
+  }
+  if(_y != 0) {
+    this.lastY = _y;
+    positionDirty = true;
+  }
 };
 
 AnimateThing.prototype.checkGridLimits = function() {
-  if(world.minX < this.x) {
-    this.x = world.minX
+  var b = world.bounds;
+  if(b.x * -1 < this.x) {
+    this.x = b.x
   } 
-  if(world.maxX > this.x) {
-    this.x = world.maxX;
+  if(b.x > this.x) {
+    this.x = b.x;
   }
-  if(world.maxY > this.y) {
-    this.y = world.maxY;
+  if(b.y > this.y) {
+    this.y = b.y;
   }
-  if(world.minY < this.y) {
-    this.y = world.minY;
+  if(b.y * -1 < this.y) {
+    this.y = b.y;
   }
 }
 
-module.exports = AnimateThing;
+AnimateThing.prototype.toString = function() {
+  return 'x: ' + this.x + ' y: ' + this.y;
+}
+
+module.exports = AnimateThing;//AnimateThing;

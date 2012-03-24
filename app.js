@@ -12,6 +12,7 @@ var ifitAuth = require('ifit-auth')
   , menus = require('./config/menus')
   , Menu = require('./lib/menu')
   , winston = require('./lib/log')
+  , world = require('./lib/world')
   , app = express.createServer();
 
 module.exports = app;
@@ -108,6 +109,8 @@ winstonExpress(app, winston);
 
 // Setup the controllers (routes)
 controllers.init(app);
+
+world.create();
 
 // Start the server
 app.listen(config.port);

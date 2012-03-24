@@ -117,17 +117,22 @@ app.listen(config.port);
 
 //Setup Socket.IO
 var io = io.listen(app);
+
+io.configure(function () {
+  io.set('log level', 1);
+  io.set('transports', ['xhr-polling']);
+  io.set('polling duration', 5);
+});
+
 io.sockets.on('connection', function(socket) {
   
   socket.emit('connection', "connected");
-  console.log('connected');
-  
-  console.log('Client Connected');
-  socket.on('message', function(message) {
-    world.personUpdate(socket.socket.sessionid, message.x, message, y);
+  world.newConnection(socket.id);
+  socket.on('move', function(message) {
+    world.personUpdate(socket.id, message.x, message.y);
   });
   socket.on('disconnect', function() {
-    console.log('Client Disconnected.');
+    //console.log('Client Disconnected.');
   });
 });
 
@@ -137,6 +142,7 @@ function emitZombies() {
 
 function emitPeople() {
   io.sockets.emit('people', world.peopleUpdate());
+  console.log(world.peopleUpdate());
 }
 
 setInterval(emitZombies, 200);

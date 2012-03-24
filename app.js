@@ -112,14 +112,16 @@ controllers.init(app);
 
 world.create();
 
-console.log('updatesdf: ' + util.inspect(world.zombieUpdate()));
-
 // Start the server
 app.listen(config.port);
 
 //Setup Socket.IO
 var io = io.listen(app);
 io.sockets.on('connection', function(socket) {
+  
+  socket.emit('con', "conencted");
+  
+  
   console.log('Client Connected');
   socket.on('message', function(message) {
     socket.broadcast.send(message);
@@ -128,6 +130,9 @@ io.sockets.on('connection', function(socket) {
   socket.on('disconnect', function() {
     console.log('Client Disconnected.');
   });
+  
+  
+  
 });
 
 console.log('Listening on http://localhost:' + config.port +

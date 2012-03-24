@@ -2,7 +2,13 @@
 
 $(document).ready(function(){
 
+  var socket = io.connect();
   socket = io.connect();
+
+  
+  socket.on('con', function(){
+    console.log("socket.id" + socket.id);
+  });
   
   
   $(function() {
@@ -32,10 +38,9 @@ $(document).ready(function(){
     }); 
   
     function emit() {
-      socket.io.emit({x: speedX, y: speedY});
+      socket.emit('move', {x: speedX, y: speedY});
     }
 
   });
-  
   
 });

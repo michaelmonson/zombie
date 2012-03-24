@@ -30,7 +30,7 @@ AnimateThing.prototype.checkGridLimits = function() {
 AnimateThing.prototype.move = function(_x, _y) {
   this.x += _x;
   this.y += _y;
-  //this.checkGridLimits();
+  this.checkGridLimits();
   if(_x != 0) {
     this.lastX = _x;
     this.positionDirty = true;

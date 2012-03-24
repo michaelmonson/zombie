@@ -118,6 +118,10 @@ app.listen(config.port);
 //Setup Socket.IO
 var io = io.listen(app);
 io.sockets.on('connection', function(socket) {
+  
+  socket.emit('connection', "connected");
+  console.log('connected');
+  
   console.log('Client Connected');
   socket.on('message', function(message) {
     world.personUpdate(socket.socket.sessionid, message.x, message, y);
@@ -125,7 +129,6 @@ io.sockets.on('connection', function(socket) {
   socket.on('disconnect', function() {
     console.log('Client Disconnected.');
   });
-  socket.on()
 });
 
 function emitZombies() {

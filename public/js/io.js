@@ -2,7 +2,12 @@
 
 $(document).ready(function(){
 
-  socket = io.connect();
+  var socket = io.connect();
+
+  
+  socket.on('connection', function(){
+    console.log("socket.id" + socket.socket.sessionid);
+  });
   
   
   $(function() {
@@ -32,10 +37,9 @@ $(document).ready(function(){
     }); 
   
     function emit() {
-      socket.io.emit({x: speedX, y: speedY});
+      socket.emit('move', {x: speedX, y: speedY});
     }
 
   });
-  
   
 });

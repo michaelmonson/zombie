@@ -14,7 +14,7 @@
       "lib/backbone-0.9.1.min.js"
     ],
     "onload": [
-      "script.js"
+      "io.js"
     ]
   },
   "contacts": [

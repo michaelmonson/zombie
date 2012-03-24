@@ -142,7 +142,6 @@ function emitZombies() {
 
 function emitPeople() {
   io.sockets.emit('people', world.peopleUpdate());
-  console.log(world.peopleUpdate());
 }
 
 setInterval(emitZombies, 200);

@@ -43,10 +43,4 @@ html
           a.brand(href='/') zombie
     #main.container-fluid
       .row-fluid
-        if typeof(menu) != 'undefined'
-          != partial('_leftnav', {menu: menu, url: url})
-        .span10
-          if typeof topMenu !== 'undefined'
-            != partial('_topnav', {topMenu: topMenu, lowerMenu: lowerMenu, url: url})
-          .row-fluid
-            !=body
+        !=body

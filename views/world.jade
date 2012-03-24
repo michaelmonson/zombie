@@ -40,7 +40,7 @@ script
     });
 
     function emit() {
-      socket.emit('move', {x: speedX, y: speedY});
+      socket.emit('move', {x: speedY, y: speedX});
     }
 
     var socket = io.connect();
@@ -65,8 +65,29 @@ script
     }
 
     function update() {
+      world.html('');
+      world.append(self);
+      var pooli = -1;
+      var px = 0, py = 0;
+      if (players.hasOwnProperty(id)) {
+        px = players[id].x;
+        py = players[id].y;
+      }
+      for (var i in players) {
+        if (!players.hasOwnProperty(i)) return;
+        var tmpm = divPool[++pooli];
+        var player = players[i];
+        tmpm.addClass("marine");
+        tmpm.css({
+          position:'absolute',
+          top:player.y - px,
+          left:player.x - py
+        });
+        tmpm.addClass(getAngle(player.lastX, player.lastY));
+        world.append(tmpm);
+      }
       for (var i = 0; i < zombies.length; ++i) {
-        var tmpz = divPool[i];
+        var tmpz = divPool[++pooli];
         tmpz.removeClass();
         tmpz.addClass("zombie");
         var ox = zombies[i].lastX;
@@ -77,10 +98,6 @@ script
           tmpz.addClass("death7");
         }
         tmpz.addClass(getAngle(ox, oy));
-        var px = 0, py = 0;
-        if (players.hasOwnProperty(id)) {
-        var px = players[id].x, py = players[id].y;
-        }
         tmpz.css({
           position:'absolute',
           top:zombies[i].y - px,

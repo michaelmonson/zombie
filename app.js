@@ -129,6 +129,7 @@ io.sockets.on('connection', function(socket) {
   socket.emit('connection', "connected");
   world.newConnection(socket.id);
   socket.on('move', function(message) {
+    console.log(message);
     world.personUpdate(socket.id, message.x, message.y);
   });
   socket.on('disconnect', function() {

@@ -3,12 +3,12 @@
   "mongodb": {
     "username": "",
     "password": "",
-    "host": "mongo.db.ifit-beta.com",
+    "host": "mongo.db.internal.ifit-dev.com",
     "database": "zombie",
     "port": 27017
   },
   "redis": {
-    "host": "redis.db.internal.ifit.com",
+    "host": "redis.db.internal.ifit-dev.com",
     "port": 6379,
     "options" : {}
   },

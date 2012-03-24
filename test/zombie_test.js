@@ -16,8 +16,9 @@ describe("zombie", function() {
     zombie.should.have.property('active');
     zombie.active.should.be.ok;
   });
-  it("should have a direction", function () {
-    zombie.should.have.property('direction');
+  it("should have a last direction", function () {
+    zombie.should.have.property('lastX');
+    zombie.should.have.property('lastY');
   });
   
   describe("a player is nearby", function() {
@@ -33,7 +34,13 @@ describe("zombie", function() {
   describe("without stimulus", function() {
     it("should ramble in a random direction", function() {
       var x = zombie.x, y = zombie.y, diff;
+      zombie.should.have.property('x',10);
+      zombie.should.have.property('y',20);
+      zombie.lastX.should.be.within(-1,1);
+      zombie.lastY.should.be.within(-1,1);
       zombie.shuffle();
+      zombie.x.should.be.within(9,11);
+      zombie.y.should.be.within(19,21);
       diff = Math.abs(zombie.x - x) + Math.abs(zombie.y - y);
       diff.should.be.above(0);
     });
@@ -42,15 +49,28 @@ describe("zombie", function() {
     });
   });
   it("should turn left", function () {
-    zombie.direction = {x: 1, y: 1};
-    zombie.turn_left(); zombie.direction.should.equal({x: 0, y: 1});
-    zombie.turn_left(); zombie.direction.should.equal({x: -1, y: 1});
-    zombie.turn_left(); zombie.direction.should.equal({x: -1, y: 0});
-    zombie.turn_left(); zombie.direction.should.equal({x: -1, y: -1});
-    zombie.turn_left(); zombie.direction.should.equal({x: 0, y: -1});
-    zombie.turn_left(); zombie.direction.should.equal({x: 1, y: -1});
-    zombie.turn_left(); zombie.direction.should.equal({x: 1, y: 0});
-    zombie.turn_left(); zombie.direction.should.equal({x: 1, y: 1});
+    zombie.lastX = 1;
+    zombie.lastY = 1;
+    zombie.turn_left(); zombie.lastX.should.eql( 0); zombie.lastY.should.eql( 1);
+    zombie.turn_left(); zombie.lastX.should.eql(-1); zombie.lastY.should.eql( 1);
+    zombie.turn_left(); zombie.lastX.should.eql(-1); zombie.lastY.should.eql( 0);
+    zombie.turn_left(); zombie.lastX.should.eql(-1); zombie.lastY.should.eql(-1);
+    zombie.turn_left(); zombie.lastX.should.eql( 0); zombie.lastY.should.eql(-1);
+    zombie.turn_left(); zombie.lastX.should.eql( 1); zombie.lastY.should.eql(-1);
+    zombie.turn_left(); zombie.lastX.should.eql( 1); zombie.lastY.should.eql( 0);
+    zombie.turn_left(); zombie.lastX.should.eql( 1); zombie.lastY.should.eql( 1);
+  });
+  it("should turn right", function () {
+    zombie.lastX = 1;
+    zombie.lastY = 1;
+    zombie.turn_right(); zombie.lastX.should.eql( 1); zombie.lastY.should.eql( 0);
+    zombie.turn_right(); zombie.lastX.should.eql( 1); zombie.lastY.should.eql(-1);
+    zombie.turn_right(); zombie.lastX.should.eql( 0); zombie.lastY.should.eql(-1);
+    zombie.turn_right(); zombie.lastX.should.eql(-1); zombie.lastY.should.eql(-1);
+    zombie.turn_right(); zombie.lastX.should.eql(-1); zombie.lastY.should.eql( 0);
+    zombie.turn_right(); zombie.lastX.should.eql(-1); zombie.lastY.should.eql( 1);
+    zombie.turn_right(); zombie.lastX.should.eql( 0); zombie.lastY.should.eql( 1);
+    zombie.turn_right(); zombie.lastX.should.eql( 1); zombie.lastY.should.eql( 1);
   });
   describe("is attacked", function() {
     it("should die", function(){

@@ -112,8 +112,6 @@ controllers.init(app);
 
 world.create();
 
-console.log('updatesdf: ' + util.inspect(world.zombieUpdate()));
-
 // Start the server
 app.listen(config.port);
 
@@ -122,7 +120,7 @@ var io = io.listen(app);
 io.sockets.on('connection', function(socket) {
   console.log('Client Connected');
   socket.on('message', function(message) {
-    world.personUpdate(socket.id, message.x, message, y);
+    world.personUpdate(socket.socket.sessionid, message.x, message, y);
   });
   socket.on('disconnect', function() {
     console.log('Client Disconnected.');

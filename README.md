@@ -43,7 +43,7 @@ Other important files that have conventional meaning
 - [Socket.IO](http://socket.io) - Real time web framework.  Websockets with fall back strategies.
 - [Backbone](http://documentcloud.github.com/backbone/) - Client side MVC framework.
 - [Confrodo](https://github.com/ifit/confrodo) - Node configuration helper.
-- [Mocha](http://visionmedia.github.com/mocha/) - Unit testing framework.
+- [Mocha](http://mochajs.org/) - Unit testing framework.
 - [Should](https://github.com/visionmedia/should.js) - Helper module to BDD assertions.
 - [Less](http://lesscss.org/) - Less CSS compiler.
 
